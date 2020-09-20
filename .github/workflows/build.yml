@@ -44,16 +44,7 @@ jobs:
     - run: | 
         ./gradlew clean assembleDebug
       shell: bash
-
-
-  upload: 
-    name: Upload apk 
-    needs: build     
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest  
-    steps:  
     - uses: actions/upload-artifact@v2
-      if: success()
       with:
         name: app
         path: app/build/outputs/apk/debug/app-debug.apk    
