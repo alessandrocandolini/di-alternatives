@@ -1,3 +1,6 @@
+![.github/workflows/build.yml](https://github.com/alessandrocandolini/di-alternatives/workflows/.github/workflows/build.yml/badge.svg)
+
+
 # The raise and fall of DI frameworks (in the Java OOP land) 
 
 Dependency injection (referred to as DI hereafter) is many things. 
