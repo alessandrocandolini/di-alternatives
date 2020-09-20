@@ -1,4 +1,4 @@
-![.github/workflows/build.yml](https://github.com/alessandrocandolini/di-alternatives/workflows/.github/workflows/build.yml/badge.svg)
+![Build](https://github.com/alessandrocandolini/di-alternatives/workflows/Build/badge.svg)
 
 
 # The raise and fall of DI frameworks (in the Java OOP land) 
