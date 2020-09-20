@@ -29,13 +29,12 @@ jobs:
           java-version: 1.8    
       - name: Run tests
         run: | 
-          ./gradlew testDebug
+          ./gradlew clean testDebug
         shell: bash
 
   build:
     name: Generate unsigned apk
     needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest  
     steps:
     - uses: actions/checkout@v2
@@ -43,10 +42,20 @@ jobs:
       with:
         java-version: 1.8
     - run: | 
-        ./gradlew assembleDebug
+        ./gradlew clean assembleDebug
       shell: bash
+
+
+  upload: 
+    name: Upload apk 
+    needs: build     
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest  
+    steps:  
     - uses: actions/upload-artifact@v2
+      if: success()
       with:
+        name: app
         path: app/build/outputs/apk/debug/app-debug.apk    
 
   release:
@@ -61,7 +70,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: ${{ github.ref }}
+        tag_name: release_${{ github.ref }}
         release_name: Release ${{ github.ref }}
         draft: false
         prerelease: false
