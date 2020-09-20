@@ -43,7 +43,7 @@ jobs:
       with:
         java-version: 1.8
     - run: | 
-        ./gradlew assemblyDebug
+        ./gradlew assembleDebug
       shell: bash
     - uses: actions/upload-artifact@v2
       with:
