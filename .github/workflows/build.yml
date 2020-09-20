@@ -1,0 +1,68 @@
+name:
+  Build
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch: 
+
+jobs:
+  test:
+    name: Run unit tests
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Checkout the code
+        uses: actions/checkout@v2 
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8    
+      - name: Run tests
+        run: | 
+          ./gradlew testDebug
+        shell: bash
+
+  build:
+    name: Generate unsigned apk
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest  
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2
+    - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+    - name: Build the App
+      run: | 
+        ./gradlew assemblyDebug
+      shell: bash
+    - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: app/build/outputs/apk/debug/app-debug.apk    
+
+  release:
+    name: Create release 
+    needs: build   
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest  
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2
+    - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
