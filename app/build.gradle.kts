@@ -1,7 +1,10 @@
+import KoTest.addKotest
+
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
+    id("com.adarshr.test-logger")
 }
 
 android {
@@ -35,12 +38,16 @@ android {
     }
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.appcompat:appcompat:1.2.0")
-    testImplementation("junit:junit:4.12")
+    addKotest()
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 

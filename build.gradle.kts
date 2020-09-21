@@ -9,6 +9,10 @@ buildscript {
         classpath(kotlin("gradle-plugin", version = "1.4.10"))
     }
 }
+plugins {
+    id("com.adarshr.test-logger") version Plugins.adarshrTestLoggerVersion
+    id("io.kotest") version Plugins.kotestGradlePlugin
+}
 
 allprojects {
     repositories {

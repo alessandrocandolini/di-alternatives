@@ -2,6 +2,7 @@
 /local.properties
 /.idea/
 /build
+/buildSrc/build
 /reports
 /captures
 *.iml

@@ -1,3 +1,4 @@
+import org.gradle.api.artifacts.dsl.DependencyHandler
 
 object Versions {
 
@@ -16,9 +17,20 @@ object Versions {
     }
 
     object Test {
-        const val kotest = "4.2.5"
+
     }
 
     const val arrow = "0.11.0"
+
+}
+
+object Libs {
+    const val kotlinVersion = "1.4.10"
+
+}
+
+object Plugins {
+    const val adarshrTestLoggerVersion = "2.0.0"
+    const val kotestGradlePlugin = "0.1.3"
 
 }

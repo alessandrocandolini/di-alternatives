@@ -1,17 +1,10 @@
 package com.alessandrocandolini.di_alternatives
 
-import org.junit.Test
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.shouldBe
 
-import org.junit.Assert.*
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+class ExampleUnitTest : FunSpec({
+    test("String length should return the length of the string") {
+     2 + 2 shouldBe 4
     }
-}
+})
