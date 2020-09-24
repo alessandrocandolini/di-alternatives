@@ -1,7 +1,10 @@
 ![Build](https://github.com/alessandrocandolini/di-alternatives/workflows/Build/badge.svg)
 
 
-# The raise and fall of DI frameworks (in the Java OOP land) 
+# The raise and fall of DI frameworks (in the Java OOP land)
+
+
+## Background and motivation
 
 Dependency injection (referred to as DI hereafter) is many things. 
 
@@ -24,3 +27,9 @@ Let's look at DI with more provocative eyeglasses: What is the problem that DI i
 DI frameworks has effectively solved problems in organising dependencies in larger scale OOP codebases, but it's always worth trying to look at different directions and put DI in perspective, instead of being sold to only one technique. 
 
 
+## The project
+
+Multi-module gradle kotlin jvm / android project, setup using gradle kotlin DSL.
+Business logic is implemented in a purely java/kotlin module, with no dependency on Android, on purpose.
+No attempt at making the project multi-platform has been made, and most of the dependencies (dagger, retrofit etc) only work for the JVM target.
+For tests, the kotest library is used.  
