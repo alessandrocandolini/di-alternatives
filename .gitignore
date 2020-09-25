@@ -1,5 +1,6 @@
 .gradle
 .settings
+.project
 /local.properties
 /.idea/
 /build
@@ -10,7 +11,3 @@
 .DS_Store
 gradle.deps
 *.swp
-.project
-app/.classpath
-app/.project
-app/.settings

@@ -1,5 +1,6 @@
 import KoTest.addKotest
-import Kotlin.addKotlinStandardLibraries
+import Kotlin.addKotlinAndroid
+import Kotlin.addKotlinJvm
 
 plugins {
     id("com.android.application")
@@ -9,12 +10,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
 
     defaultConfig {
         applicationId = "com.alessandrocandolini.di_alternatives"
         minSdkVersion(21)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
 
@@ -46,7 +47,8 @@ tasks.withType<Test> {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(project(":business"))
-    addKotlinStandardLibraries()
+    addKotlinJvm()
+    addKotlinAndroid()
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.appcompat:appcompat:1.2.0")
     addKotest()

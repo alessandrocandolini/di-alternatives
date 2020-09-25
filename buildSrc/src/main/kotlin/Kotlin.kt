@@ -3,18 +3,27 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 object Kotlin {
 
     const val runtimeVersion = "1.4.10"
+    private const val coroutineVersion = "1.3.9"
 
-    private val group = "org.jetbrains.kotlin".toGroupId()
-    private val names : List<Pair<NameId, Version>> = listOf(
-        "kotlin-stdlib" to runtimeVersion
-    ).map {
-        it.first.toNameId() to it.second.toVersion()
+    private val kotlinGroup = "org.jetbrains.kotlin".toGroupId()
+    private val kotlinxGroup = "org.jetbrains.kotlinx".toGroupId()
+
+    private val kotlinStdlib = kotlinGroup + "kotlin-stdlib-jdk8".toNameId() + runtimeVersion.toVersion() + DependencyConfig.IMPLEMENTATION
+
+    private val kotlinxCoroutines = kotlinxGroup + "kotlinx-coroutines-core".toNameId() + coroutineVersion.toVersion() + DependencyConfig.IMPLEMENTATION
+    private val kotlinxCoroutinesAndroid = kotlinxGroup + "kotlinx-coroutines-android".toNameId() + coroutineVersion.toVersion() + DependencyConfig.IMPLEMENTATION
+
+    fun DependencyHandler.addKotlinJvm() {
+        implementDependencies(listOf(
+            kotlinStdlib,
+            kotlinxCoroutines
+        ))
     }
 
-    private val dependencies = names.map { d -> group + d.first + d.second + DependencyConfig.IMPLEMENTATION}
-
-    fun DependencyHandler.addKotlinStandardLibraries() {
-        implementDependencies(dependencies)
+    fun DependencyHandler.addKotlinAndroid() {
+        implementDependencies(listOf(
+            kotlinxCoroutinesAndroid
+        ))
     }
 
 }

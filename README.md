@@ -32,4 +32,4 @@ DI frameworks has effectively solved problems in organising dependencies in larg
 Multi-module gradle kotlin jvm / android project, setup using gradle kotlin DSL.
 Business logic is implemented in a purely java/kotlin module, with no dependency on Android, on purpose.
 No attempt at making the project multi-platform has been made, and most of the dependencies (dagger, retrofit etc) only work for the JVM target.
-For tests, the kotest library is used.  
+For tests, the kotest library is used.
