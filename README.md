@@ -44,4 +44,4 @@ Libraries used:
 * [kotest](https://kotest.io/) for unit, integration and property-based testing (bye bye junit!)
 * [coil](https://github.com/coil-kt/coil) for images
 
-Limited usage of Google's androidx stack has been made, on purpose. 
+Limited usage of Google's androidx stack has been made, on purpose. This repo is about concepts, not about mastering a particular tech stack. 
