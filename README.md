@@ -29,7 +29,19 @@ DI frameworks has effectively solved problems in organising dependencies in larg
 
 ## The project
 
-Multi-module gradle kotlin jvm / android project, setup using gradle kotlin DSL.
+Multi-module single platform (ie, jvm) gradle kotlin/android project, setup using gradle kotlin DSL.
 Business logic is implemented in a purely java/kotlin module, with no dependency on Android, on purpose.
-No attempt at making the project multi-platform has been made, and most of the dependencies (dagger, retrofit etc) only work for the JVM target.
-For tests, the kotest library is used.
+No attempt at making the project multi-platform has been made, and most of the dependencies (dagger, retrofit etc) only work on the JVM.
+
+The architecture is old-fashioned, sort of a flavour of clean architecture with a MVP on the view layer. No attempt at being dogmatic on this has been made.
+
+Libraries used:
+* [kotlin standard library for jvm](https://kotlinlang.org/api/latest/jvm/stdlib/) 
+* [kotlin coroutines](https://github.com/Kotlin/kotlinx.coroutines) 
+* [kotlin serialization](https://github.com/Kotlin/kotlinx.serialization) 
+* Square's [retrofit2](https://square.github.io/retrofit/) and [okttp](https://square.github.io/okhttp/)
+* [dagger](https://dagger.dev/dev-guide/) and particularly [hint](https://dagger.dev/hilt/) for DI 
+* [kotest](https://kotest.io/) for unit, integration and property-based testing (bye bye junit!)
+* [coil](https://github.com/coil-kt/coil) for images
+
+Limited usage of Google's androidx stack has been made, on purpose. 
