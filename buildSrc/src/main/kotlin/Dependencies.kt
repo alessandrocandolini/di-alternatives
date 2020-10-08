@@ -6,7 +6,7 @@ object Versions {
         const val runtime = "1.4.10"
         const val collections = "0.3.3"
         const val coroutines = "1.3.9"
-        const val serializationRuntime = "1.0.0-RC"
+        const val serializationRuntime = "1.0.0"
 
     }
 

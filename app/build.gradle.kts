@@ -5,7 +5,6 @@ import Kotlin.addKotlinJvm
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("android.extensions")
     id("com.adarshr.test-logger")
 }
 
