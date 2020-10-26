@@ -9,12 +9,13 @@ CI/CD style of development is achieved by configuring basic github actions.
 
 ## What this project is NOT about
 
-Although any mobile application will touch some (if not all) of the following areas to some extend, these are **not** the primary goal of this project: 
+Although any mobile application will have to touch to some degree at least few (if not all) of the following areas, these are **not** meant to be the primary concern of this project and this project should not be considered as a showcase of these: 
 
 * architecture: The architecture is old-fashioned, sort of a flavour of OOP clean architecture with a MVP on the view laye; no attempt has been made at being accurate/dogmatic about this. 
 * concurrency: concurrency is a fashinating, non-trivial topic with far-reaching consequences in many areas including mobile apps, and there are plenty of different approaches and models of concurrency that can be used to approach the subject and its implementation (eg, Java-like shared mutable state with blocking or non-blocking synchronisation, CSP, actor model, STM, streams, reactive extensions, join calculus, etc); none of these is taken into account here, we will develop instead a simpler application with basic asynchronous support. 
 * offline-first application: despite the fact that at a certain point we would like to setup a local DB for this application in order to make the application a bit more realistic, no attempt will be made at exploring mobile DBs, ORMs, and offline first patterns (CRDTs, etc) 
 * kotlin multiplatform: despite the fact that we have made an effort into implementing the business logic in a purely java/kotlin module (because it's a good exercise to make business logic platform-agnostic as it should be), there is no attempt at exploring KMP technologies, and most of the dependencies used here (eg, dagger, retrofit etc) only work on the JVM target. 
+* exploring github actions for android project in detail 
 
 
 ## Background and motivation
