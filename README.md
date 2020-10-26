@@ -18,6 +18,11 @@ Although any mobile application will have to touch to some degree some (if not a
 * functional idioms: some of the code will be influenced by FP, particularly in the part that emphatises limits of a DI approach; however, illustrating FP concepts, ideas and patterns is not in the scope in this project, and an effort has been made to avoid heavy functional artillery (eg, comonadic UIs are becoming more and more widespread to manage the complexity of certain UI, but we are not using it here)
 * CI/CD: exploring github actions for android project in detail 
 
+## What this project is about
+
+* Learn about dependency inhection and mainstream techniques and libraries for deal with it at scale; focus will be particularly on the dagger compiler and runtime 
+* Be provocative and challenge the role of DI in modern codebases, showing that DI frameworks are a solution to the sympthoms rather than to the actual underlying problem, and tentative advocate that DI is an antipattern; the aim of this part is to develop a better understanding of how DI fits into a bigger picture (more info about this in the section below 
+
 
 ## Background and motivation
 
