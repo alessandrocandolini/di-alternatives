@@ -5,6 +5,8 @@
 
 Multi-module single platform (ie, jvm) gradle kotlin/android project, setup using gradle kotlin DSL, to explore pros, cons and alternatives to dependency injection and dependency injection frameworks in OOP. 
 
+CI/CD style of development is achieved by configuring basic github actions. 
+
 ## What this project is NOT about
 
 Although any mobile application will touch some (if not all) of the following areas to some extend, these are **not** the primary goal of this project: 
