@@ -1,7 +1,16 @@
 ![Build](https://github.com/alessandrocandolini/di-alternatives/workflows/Build/badge.svg)
 
 
-# The raise and fall of DI frameworks (in the Java OOP land)
+# The raise and fall of DI frameworks (in the OOP land)
+
+Multi-module single platform (ie, jvm) gradle kotlin/android project, setup using gradle kotlin DSL, to explore pros, cons and alternatives to dependency injection and dependency injection frameworks in OOP. 
+
+## What this project is NOT about
+
+* architecture: The architecture is old-fashioned, sort of a flavour of OOP clean architecture with a MVP on the view laye; no attempt has been made at being accurate/dogmatic about this. 
+* concurrency: concurrency is a fashinating, non-trivial topic with far-reaching consequences in many areas including mobile apps, and there are plenty of different approaches and models of concurrency that can be used to approach the subject and its implementation (eg, Java-like shared mutable state with blocking or non-blocking synchronisation, CSP, actor model, STM, streams, reactive extensions, join calculus, etc); none of these is taken into account here, we will develop instead a simpler application with basic asynchronous support. 
+* offline-first application: despite the fact that at a certain point we would like to setup a local DB for this application in order to make the application a bit more realistic, no attempt will be made at exploring mobile DBs, ORMs, and offline first patterns (CRDTs, etc) 
+* kotlin multiplatform: despite the fact that we have made an effort into implementing the business logic in a purely java/kotlin module (because it's a good exercise to make business logic platform-agnostic as it should be), there is no attempt at exploring KMP technologies, and most of the dependencies used here (eg, dagger, retrofit etc) only work on the JVM target. 
 
 
 ## Background and motivation
@@ -27,13 +36,8 @@ Let's look at DI with more provocative eyeglasses: What is the problem that DI i
 DI frameworks has effectively solved problems in organising dependencies in larger scale OOP codebases, but it's always worth trying to look at different directions and put DI in perspective, instead of being sold to only one technique. 
 
 
-## The project
+## Tech stack 
 
-Multi-module single platform (ie, jvm) gradle kotlin/android project, setup using gradle kotlin DSL.
-Business logic is implemented in a purely java/kotlin module, with no dependency on Android, on purpose.
-No attempt at making the project multi-platform has been made, and most of the dependencies (dagger, retrofit etc) only work on the JVM.
-
-The architecture is old-fashioned, sort of a flavour of clean architecture with a MVP on the view layer. No attempt at being dogmatic on this has been made.
 
 Libraries used:
 * [kotlin standard library for jvm](https://kotlinlang.org/api/latest/jvm/stdlib/) 
