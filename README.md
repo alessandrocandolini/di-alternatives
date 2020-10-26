@@ -9,7 +9,7 @@ CI/CD style of development is achieved by configuring basic github actions.
 
 ## What this project is NOT about
 
-Although any mobile application will have to touch to some degree at least few (if not all) of the following areas, these are **not** meant to be the primary concern of this project and this project should not be considered as a showcase of these: 
+Although any mobile application will have to touch to some degree some (if not all) of the following areas, these are **not** meant to be the primary concern of this project and this project should not be considered as a showcase of these: 
 
 * mobile architecture: the architecture is old-fashioned, OOP clean architecture (sort of) using a flavour of MVP on the view/presentation layer; no attempt has been made at being accurate/rigorous/dogmatic about this. 
 * concurrency: concurrency is a fashinating, non-trivial topic with far-reaching consequences in many areas including mobile apps (where its relevance is sometimes underestimated), and there are plenty of different models of concurrency that can be exploited to approach the subject and its implementation (eg, Java-like shared mutable state with blocking or non-blocking synchronisation, CSP, actor model, STM, streams, reactive extensions, join calculus, etc; some of these are provided out of the box as part of the kotlin standard library); none of these is taken into account here, we will develop instead a simpler application with basic asynchronous support using kotlin coroutines. 
