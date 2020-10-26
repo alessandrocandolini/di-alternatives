@@ -7,6 +7,8 @@ Multi-module single platform (ie, jvm) gradle kotlin/android project, setup usin
 
 ## What this project is NOT about
 
+Although any mobile application will touch some (if not all) of the following areas to some extend, these are **not** the primary goal of this project: 
+
 * architecture: The architecture is old-fashioned, sort of a flavour of OOP clean architecture with a MVP on the view laye; no attempt has been made at being accurate/dogmatic about this. 
 * concurrency: concurrency is a fashinating, non-trivial topic with far-reaching consequences in many areas including mobile apps, and there are plenty of different approaches and models of concurrency that can be used to approach the subject and its implementation (eg, Java-like shared mutable state with blocking or non-blocking synchronisation, CSP, actor model, STM, streams, reactive extensions, join calculus, etc); none of these is taken into account here, we will develop instead a simpler application with basic asynchronous support. 
 * offline-first application: despite the fact that at a certain point we would like to setup a local DB for this application in order to make the application a bit more realistic, no attempt will be made at exploring mobile DBs, ORMs, and offline first patterns (CRDTs, etc) 
