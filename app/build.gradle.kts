@@ -1,7 +1,3 @@
-import KoTest.addKotest
-import Kotlin.addKotlinAndroid
-import Kotlin.addKotlinJvm
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -46,11 +42,15 @@ tasks.withType<Test> {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(project(":business"))
-    addKotlinJvm()
-    addKotlinAndroid()
+    implementation(Libs.kotlinCoroutinesCore)
+    implementation(Libs.kotlinCoroutinesAndroid)
+    implementation(Libs.kotlin)
+
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.appcompat:appcompat:1.2.0")
-    addKotest()
+    testImplementation(Libs.kotestRunner)
+    testImplementation(Libs.kotestAssertions)
+    testImplementation(Libs.kotestProperty)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 

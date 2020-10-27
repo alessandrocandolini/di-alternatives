@@ -4,8 +4,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath ("com.android.tools.build:gradle:4.0.1")
-        classpath(kotlin("gradle-plugin", version = Kotlin.runtimeVersion))
+        classpath ("com.android.tools.build:gradle:4.0.2")
+        classpath(kotlin("gradle-plugin", version = Versions.kotlinRuntime))
     }
 }
 plugins {

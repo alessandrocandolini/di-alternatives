@@ -1,5 +1,3 @@
-import KoTest.addKotest
-import Kotlin.addKotlinJvm
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
 
@@ -33,8 +31,11 @@ tasks.withType<KotlinJvmCompile> {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    addKotlinJvm()
-    addKotest()
+    implementation(Libs.kotlinCoroutinesCore)
+    implementation(Libs.kotlin)
+    testImplementation(Libs.kotestRunner)
+    testImplementation(Libs.kotestAssertions)
+    testImplementation(Libs.kotestProperty)
 }
 
 java {
