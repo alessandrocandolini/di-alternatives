@@ -9,18 +9,17 @@ CI/CD style of development is achieved by configuring basic github actions.
 
 ## What this project is NOT about
 
-Although any mobile application will have to touch to some degree some (if not all) of the following areas, these are **not** meant to be the primary concern of this project and this project should not be considered as a showcase of these: 
+Although any mobile application will have to touch some (if not all) of the following areas to a certain degree, these are **not** meant to be the primary concern of this project and this project should not be considered as a showcase of these: 
 
-* mobile architecture: the architecture here is old-fashioned, it's a OOP "clean" architecture (sort of) using a flavour of MVP on the view/presentation layer; no attempt has been made at being accurate/rigorous/dogmatic about this. 
+* mobile architecture: the architecture here is old-fashioned, it's a OOP "clean" architecture (sort of) using a flavour of MVP on the view/presentation layer; no attempt has been made at being accurate/rigorous/dogmatic/fancy about this (and particularly there is no interest in following any of the google guidelines). 
 * concurrency: concurrency is a fashinating, non-trivial topic with far-reaching consequences in many areas including mobile apps (where its relevance is sometimes underestimated), and there are plenty of different models of concurrency that can be exploited to approach the subject and its implementation (eg, Java-like shared mutable state with blocking or non-blocking synchronisation, CSP, actor model, STM, streams, reactive extensions, join calculus, etc; some of these are provided out of the box as part of the kotlin standard library); none of these is taken into account here, we will develop instead a simpler application with basic asynchronous support using kotlin coroutines. 
 * offline-first application: despite the fact that at a certain point we would like to setup a local DB for this application in order to make the application a bit more realistic, no attempt will be made at exploring mobile DBs, ORMs, and offline first patterns (CRDTs, etc) 
-* kotlin multiplatform: despite the fact that we have made an effort to implement the business logic in a purely java/kotlin module (because it's a good exercise to make business logic platform-agnostic, as it should be), there is no attempt at exploring KMP technologies, and most of the dependencies used here (eg, dagger, retrofit etc) only work on the JVM target. 
-* functional idioms: some of the code will be influenced by FP, particularly in the part that emphatises limits of a DI approach; however, illustrating FP concepts, ideas and patterns is not in the scope in this project, and an effort has been made to avoid heavy functional artillery (eg, comonadic UIs are becoming more and more widespread to manage the complexity of certain UI, but we are not using it here)
+* functional idioms: some of the code will reveal some FP influence/preference, particularly in the part that emphatises limits of a DI approach; however, illustrating FP concepts, ideas and patterns is not the scope in this project, and a conscious effort has been made to avoid heavy functional artillery
 * CI/CD: exploring github actions for android project in detail 
 
 ## What this project is about
 
-* Learn about dependency inhection and mainstream techniques and libraries for deal with it at scale; focus will be particularly on the dagger compiler and runtime 
+* Learn about dependency injection and mainstream techniques and libraries for deal with it at scale; focus will be particularly on the dagger compiler and runtime 
 * Be provocative and challenge the role of DI in modern codebases, showing that DI frameworks are a solution to the sympthoms rather than to the actual underlying problem, and tentative advocate that DI is an antipattern; the aim of this part is to develop a better understanding of how DI fits into a bigger picture (more info about this in the section below 
 
 
@@ -60,3 +59,4 @@ Libraries used:
 * [coil](https://github.com/coil-kt/coil) for images
 
 Limited usage of Google's androidx stack has been made, on purpose. This repo is about concepts, not about mastering a particular tech stack. 
+
