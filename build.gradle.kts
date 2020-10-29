@@ -2,10 +2,11 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath ("com.android.tools.build:gradle:4.0.2")
-        classpath(kotlin("gradle-plugin", version = Versions.kotlinRuntime))
+        classpath ("com.android.tools.build:gradle:4.2.0-alpha15")
+        classpath(kotlin("gradle-plugin", version = Versions.kotlin))
     }
 }
 plugins {
@@ -17,6 +18,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
 }
 
