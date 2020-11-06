@@ -3,7 +3,7 @@
 
 # The raise and fall of DI frameworks (in the OOP land)
 
-Multi-module single platform (ie, jvm) gradle kotlin/android project, setup using gradle kotlin DSL, to explore pros, cons and alternatives to dependency injection and dependency injection frameworks in OOP. 
+Multi-module single platform gradle kotlin/android project, setup using gradle kotlin DSL, to explore pros, cons, rationale and alternatives to dependency injection and dependency injection containers in OOP. 
 
 CI/CD style of development is achieved by configuring basic github actions. 
 
@@ -25,9 +25,10 @@ Although any mobile application will have to touch some (if not all) of the foll
 
 ## Background and motivation
 
-Dependency injection (referred to as DI hereafter) is many things. 
+Usage of DI and DI containers has been raising in popularity in Android development these days, and they have been around for ages in Java enterprise. This project is about refreshing these concepts, show how to apply them by leveraging some of the modern libraries and patterns available in the java/kotlin/android ecosystem, illustrate the many benefits that we can get, and at the same time challenge this viewpoint and contribute to the conversation on whether an argument can be made that DI containers should instead be considered as something fixing the symptomps rather than the actual underlying issue, and what the alternatives could be. 
 
-First and foremost, it is an important OOP pattern and concept. 
+
+Dependency injection (referred to as DI hereafter) is many things. First and foremost, it is an important OOP pattern and concept. 
 More on this later on, but in short it's about externalising the dependencies of a class (via constructor injection when the dependency is mandatory, or via setters when the dependency is optional). 
 If/when the external dependencies are defined in terms of interfaces designed from the point of view of the consumer (instead of using directly classes, and/or using interfaces that expose an API which is 1:1 with the underlying implementation, ie, an interface leaking the implementation details), it supports inversion of control and it makes the dependencies pluggable from outside.
 Supposedly, this increases (among others): modularity, testability, etc. 
@@ -36,7 +37,7 @@ Why am I saying **virtually**? I'll expand later however the main point here is 
 
 Indeed, in OOP land there are plenty of advantages in using DI, compared to more naive and less modular solutions. 
 
-Systematic adoption of the DI pattern typically leads to a proliferation of classes, and DI tools (eg, libraries/frameworks like dagger, guice, in the Java land, etc) have been invented to help mitigating the growing cost of managing the dependency graph in larger scale projects. 
+Systematic adoption of the DI pattern typically leads to a proliferation of classes, and DI containers (eg, libraries/frameworks like dagger, guice, in the Java land, etc) have been invented to help mitigating the growing cost of managing the dependency graph in larger scale projects. 
 The aim of these tools is complementaty to the usage of the DI pattern: they to resolve the dependency graph (either at runtime or compile time, depending on the tool). 
 
 This has been the state of art of Java DI for many years. From `@autowire` in spring framework, to `@inject` and `@provides` annotations make them way into `javax` itself, to the advent of many libraries like guice, dagger and others, DI tools have become a standard in the development of OOP applications at non-trivial scale. 
