@@ -58,5 +58,5 @@ Libraries used:
 * [kotest](https://kotest.io/) for unit, integration and property-based testing (bye bye junit!)
 * [coil](https://github.com/coil-kt/coil) for images
 
-Limited usage of Google's androidx stack has been made, on purpose. This repo is about concepts, not about mastering a particular tech stack. 
+Limited usage of Google's androidx/jetpack stack has been made on purpose (with the exception of the new jetpack compose). This repo is about concepts, not about mastering a particular tech stack. Also, i'm quite opinionated on androidx/jetpack libraries being badly designed, pretty disfunctional, and being just a badly re-invented wheel that could be achieved with better, more general, more re-usable abstractions. 
 
