@@ -13,4 +13,9 @@ object Versions {
     const val arrow = "0.11.0"
     const val kotest = "4.3.0"
 
+    const val okhttp = "4.10.0-RC1"
+    const val retrofit = "2.9.0"
+    const val retrofitSerializationConverter = "0.8.0"
+
+
 }

@@ -31,10 +31,10 @@ tasks.withType<KotlinJvmCompile> {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(Libs.Coroutines.core)
+    implementation(Libs.Kotlin.Coroutines.core)
     implementation(Libs.kotlin)
 
-    testImplementation(Libs.Coroutines.test)
+    testImplementation(Libs.Kotlin.Coroutines.test)
     testImplementation(Libs.Kotest.core)
     testImplementation(Libs.Kotest.engine)
     testImplementation(Libs.Kotest.runner) // remove and rely on kotest

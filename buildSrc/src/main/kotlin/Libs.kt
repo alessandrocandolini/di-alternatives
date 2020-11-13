@@ -2,10 +2,18 @@ object Libs {
 
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 
-    object Coroutines {
-        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
-        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}"
-        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutines}"
+    object Kotlin {
+        object Coroutines {
+            const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
+            const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}"
+            const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutines}"
+        }
+
+        object Serialization {
+
+            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1" // TODO add it to Versions
+
+        }
     }
 
     object AndroidX {
@@ -30,6 +38,15 @@ object Libs {
         const val runner = "io.kotest:kotest-runner-junit5-jvm:${Versions.kotest}"
         const val assertions = "io.kotest:kotest-assertions-core:${Versions.kotest}"
         const val property = "io.kotest:kotest-property:${Versions.kotest}"
+    }
+
+    object Http {
+
+        const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
+        const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+        const val retrofitSerializationAdapter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.retrofitSerializationConverter}"
+
+
     }
 
 }

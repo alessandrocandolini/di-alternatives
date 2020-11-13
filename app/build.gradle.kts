@@ -66,8 +66,8 @@ dependencies {
     implementation(project(":business"))
 
     implementation(Libs.kotlin)
-    implementation(Libs.Coroutines.core)
-    implementation(Libs.Coroutines.android)
+    implementation(Libs.Kotlin.Coroutines.core)
+    implementation(Libs.Kotlin.Coroutines.android)
 
     implementation("androidx.compose.compiler:compiler:1.0.0-alpha06")
 
