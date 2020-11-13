@@ -11,7 +11,7 @@ object Libs {
 
         object Serialization {
 
-            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1" // TODO add it to Versions
+            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerializationRuntime}"
 
         }
     }

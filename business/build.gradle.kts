@@ -3,7 +3,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
 
 plugins {
     id("java-library")
-    id("kotlin")
+    kotlin("jvm")
+    kotlin("plugin.serialization") version Versions.kotlin
     id("io.kotest")
 }
 
@@ -33,6 +34,13 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(Libs.Kotlin.Coroutines.core)
     implementation(Libs.kotlin)
+
+    // migrate okhttp to a different module, don't use business to do networking
+    implementation(Libs.Http.okhttp)
+    implementation(Libs.Http.retrofit)
+    implementation(Libs.Http.retrofitSerializationAdapter)
+    implementation(Libs.Kotlin.Serialization.serialization)
+    testImplementation(Libs.Http.okhttpMockWebServer)
 
     testImplementation(Libs.Kotlin.Coroutines.test)
     testImplementation(Libs.Kotest.core)

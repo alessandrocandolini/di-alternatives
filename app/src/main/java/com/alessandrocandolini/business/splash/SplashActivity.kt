@@ -1,4 +1,4 @@
-package com.alessandrocandolini.di_alternatives.splash
+package com.alessandrocandolini.business.splash
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

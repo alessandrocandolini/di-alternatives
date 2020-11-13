@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("com.adarshr.test-logger")
-    kotlin("plugin.serialization") version "1.4.10"
 }
 
 android {
@@ -70,7 +69,7 @@ dependencies {
     implementation(Libs.Kotlin.Coroutines.core)
     implementation(Libs.Kotlin.Coroutines.android)
 
-    implementation("androidx.compose.compiler:compiler:1.0.0-alpha06")
+    implementation("androidx.compose.compiler:compiler:1.0.0-alpha07")
 
     implementation(Libs.AndroidX.Compose.foundation)
     implementation(Libs.AndroidX.Compose.layout)
@@ -78,16 +77,8 @@ dependencies {
     implementation(Libs.AndroidX.Compose.runtime)
     implementation(Libs.AndroidX.Compose.tooling)
 
-    implementation("androidx.core:core-ktx:1.3.1")
+    implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
-
-    // migrate okhttp to a different module, don't use app to do networking
-    implementation(Libs.Http.okhttp)
-    implementation(Libs.Http.retrofit)
-    implementation(Libs.Http.retrofitSerializationAdapter)
-    implementation(Libs.Kotlin.Serialization.serialization)
-    testImplementation(Libs.Http.okhttpMockWebServer)
-
 
     testImplementation(Libs.Kotest.runner)
     testImplementation(Libs.Kotest.assertions)
