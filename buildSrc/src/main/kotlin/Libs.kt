@@ -43,6 +43,7 @@ object Libs {
     object Http {
 
         const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
+        const val okhttpMockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okhttp}"
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val retrofitSerializationAdapter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.retrofitSerializationConverter}"
 
