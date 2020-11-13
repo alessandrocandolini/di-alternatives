@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.serialization") version Versions.kotlin
     id("io.kotest")
+    kotlin("kapt")
 }
 
 tasks.withType<Test> {
@@ -41,6 +42,11 @@ dependencies {
     implementation(Libs.Http.retrofitSerializationAdapter)
     implementation(Libs.Kotlin.Serialization.serialization)
     testImplementation(Libs.Http.okhttpMockWebServer)
+
+    // arrow
+    implementation("io.arrow-kt:arrow-core:${Versions.arrow}")
+    implementation("io.arrow-kt:arrow-syntax:${Versions.arrow}")
+    kapt("io.arrow-kt:arrow-meta:${Versions.arrow}")
 
     testImplementation(Libs.Kotlin.Coroutines.test)
     testImplementation(Libs.Kotest.core)
