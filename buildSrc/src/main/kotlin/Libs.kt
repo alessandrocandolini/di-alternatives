@@ -1,19 +1,17 @@
 object Libs {
 
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
-
     object Kotlin {
+
+        const val standardLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+
         object Coroutines {
             const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
             const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}"
             const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutines}"
         }
 
-        object Serialization {
+        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerializationRuntime}"
 
-            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerializationRuntime}"
-
-        }
     }
 
     object AndroidX {
@@ -51,7 +49,9 @@ object Libs {
     }
 
     object Arrow {
-
+        const val core = "io.arrow-kt:arrow-core:${Versions.arrow}"
+        const val syntax = "io.arrow-kt:arrow-syntax:${Versions.arrow}"
+        const val meta = "io.arrow-kt:arrow-meta:${Versions.arrow}"
 
     }
 

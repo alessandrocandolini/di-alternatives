@@ -65,7 +65,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(project(":business"))
 
-    implementation(Libs.kotlin)
+    implementation(Libs.Kotlin.standardLib)
     implementation(Libs.Kotlin.Coroutines.core)
     implementation(Libs.Kotlin.Coroutines.android)
 

@@ -34,19 +34,19 @@ tasks.withType<KotlinJvmCompile> {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(Libs.Kotlin.Coroutines.core)
-    implementation(Libs.kotlin)
+    implementation(Libs.Kotlin.standardLib)
 
     // migrate okhttp to a different module, don't use business to do networking
     implementation(Libs.Http.okhttp)
     implementation(Libs.Http.retrofit)
     implementation(Libs.Http.retrofitSerializationAdapter)
-    implementation(Libs.Kotlin.Serialization.serialization)
+    implementation(Libs.Kotlin.serialization)
     testImplementation(Libs.Http.okhttpMockWebServer)
 
     // arrow
-    implementation("io.arrow-kt:arrow-core:${Versions.arrow}")
-    implementation("io.arrow-kt:arrow-syntax:${Versions.arrow}")
-    kapt("io.arrow-kt:arrow-meta:${Versions.arrow}")
+    implementation(Libs.Arrow.core)
+    implementation(Libs.Arrow.syntax)
+    kapt(Libs.Arrow.meta)
 
     testImplementation(Libs.Kotlin.Coroutines.test)
     testImplementation(Libs.Kotest.core)
