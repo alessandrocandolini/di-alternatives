@@ -1,7 +1,7 @@
 object Versions {
     const val kotlin = "1.4.10" // "1.4.20-RC" is not compatible with the compose compiler
     const val kotlinCollections = "0.3.3"
-    const val kotlinCoroutines = "1.4.0"
+    const val kotlinCoroutines = "1.4.1"
     const val kotlinSerializationRuntime = "1.0.1"
 
     const val androidxCore = "1.3.1"

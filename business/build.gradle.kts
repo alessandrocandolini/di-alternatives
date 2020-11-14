@@ -7,6 +7,7 @@ plugins {
     kotlin("plugin.serialization") version Versions.kotlin
     id("io.kotest")
     kotlin("kapt")
+    id("name.remal.check-dependency-updates")
 }
 
 tasks.withType<Test> {

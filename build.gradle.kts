@@ -3,6 +3,7 @@ buildscript {
         google()
         mavenCentral()
         jcenter()
+        maven(url = "https://plugins.gradle.org/m2/") // for check-dependency-updates
     }
     dependencies {
         classpath ("com.android.tools.build:gradle:4.2.0-alpha16")
@@ -12,6 +13,7 @@ buildscript {
 plugins {
     id("com.adarshr.test-logger") version Plugins.adarshrTestLoggerVersion
     id("io.kotest") version Plugins.kotestGradlePlugin
+    id("name.remal.check-dependency-updates") version Plugins.checkDependencyUpdates
 }
 
 allprojects {

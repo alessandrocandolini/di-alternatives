@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("com.adarshr.test-logger")
+    id("name.remal.check-dependency-updates")
 }
 
 android {
