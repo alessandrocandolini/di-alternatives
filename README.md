@@ -7,6 +7,11 @@ Multi-module single platform gradle kotlin/android project, setup using gradle k
 
 CI/CD style of development is achieved by configuring basic github actions. 
 
+## What this project is about
+
+* Learn about dependency injection and mainstream techniques and libraries for deal with it at scale; focus will be particularly on the dagger compiler and runtime 
+* Be provocative and challenge the role of DI in modern codebases, showing that DI frameworks are a solution to the sympthoms rather than to the actual underlying problem, and tentative advocate that DI is an antipattern; the aim of this part is to develop a better understanding of how DI fits into a bigger picture (more info about this in the section below 
+
 ## What this project is NOT about
 
 Although any mobile application will have to touch some (if not all) of the following areas to a certain degree, these are **not** meant to be the primary concern of this project and this project should not be considered as a showcase of these: 
@@ -15,13 +20,8 @@ Although any mobile application will have to touch some (if not all) of the foll
 * concurrency: concurrency is a fashinating, non-trivial topic with far-reaching consequences in many areas including mobile apps (where its relevance is sometimes underestimated), and there are plenty of different models of concurrency that can be exploited to approach the subject and its implementation (eg, Java-like shared mutable state with blocking or non-blocking synchronisation, CSP, actor model, STM, streams, reactive extensions, join calculus, etc; some of these are provided out of the box as part of the kotlin standard library); none of these is taken into account here, we will develop instead a simpler application with basic asynchronous support using kotlin coroutines. 
 * offline-first application: despite the fact that at a certain point we would like to setup a local DB for this application in order to make the application a bit more realistic, no attempt will be made at exploring mobile DBs, ORMs, and offline first patterns (CRDTs, etc) 
 * functional idioms: some of the code will reveal some FP influence/preference, particularly in the part that emphatises limits of a DI approach; however, illustrating FP concepts, ideas and patterns is not the scope in this project, and a conscious effort has been made to avoid heavy functional artillery
+* Kotlin multiplatform
 * CI/CD: exploring github actions for android project in detail 
-
-## What this project is about
-
-* Learn about dependency injection and mainstream techniques and libraries for deal with it at scale; focus will be particularly on the dagger compiler and runtime 
-* Be provocative and challenge the role of DI in modern codebases, showing that DI frameworks are a solution to the sympthoms rather than to the actual underlying problem, and tentative advocate that DI is an antipattern; the aim of this part is to develop a better understanding of how DI fits into a bigger picture (more info about this in the section below 
-
 
 ## Background and motivation
 
@@ -51,13 +51,14 @@ DI frameworks has effectively solved problems in organising dependencies in larg
 
 
 Libraries used:
-* [kotlin standard library for jvm](https://kotlinlang.org/api/latest/jvm/stdlib/) 
-* [kotlin coroutines](https://github.com/Kotlin/kotlinx.coroutines) 
-* [kotlin serialization](https://github.com/Kotlin/kotlinx.serialization) 
-* Square's [retrofit2](https://square.github.io/retrofit/) and [okttp](https://square.github.io/okhttp/)
+* [kotlin standard library for JVM](https://kotlinlang.org/api/latest/jvm/stdlib/) 
+* [kotlin coroutines](https://github.com/Kotlin/kotlinx.coroutines) (including coroutines testing) 
+* [kotlin serialization](https://github.com/Kotlin/kotlinx.serialization) for json parsing
+* Square's [retrofit2](https://square.github.io/retrofit/) and [okttp](https://square.github.io/okhttp/) (including mock server) 
 * [dagger](https://dagger.dev/dev-guide/) and particularly [hint](https://dagger.dev/hilt/) for DI 
 * [kotest](https://kotest.io/) for unit, integration and property-based testing (bye bye junit!)
 * [coil](https://github.com/coil-kt/coil) for images
+* [arrow](https://github.com/arrow-kt/arrow) as a functional companion library, when appropriate/needed
 
 Limited usage of Google's androidx/jetpack stack has been made on purpose (with the exception of the new jetpack compose). This repo is about concepts, not about mastering a particular tech stack. Also, i'm quite opinionated on androidx/jetpack libraries being badly designed, pretty disfunctional, and being just a badly re-invented wheel that could be achieved with better, more general, more re-usable abstractions. 
 
