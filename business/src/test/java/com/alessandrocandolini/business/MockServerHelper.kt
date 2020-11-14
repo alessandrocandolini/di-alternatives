@@ -18,4 +18,5 @@ internal fun <V> withMockServer(f: MockWebServer.() -> V): V {
     return r
 }
 
-internal fun MockWebServer.fullUrl(path : String) : HttpUrl = url(path)
+internal fun MockWebServer.fullUrl(path : String) : String = url(path).toString()
+

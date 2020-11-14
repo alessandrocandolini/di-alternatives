@@ -36,7 +36,7 @@ interface ApiKeyStore {
 //}
 
 // how to test this?
-// We jave several options
+// We have several options:
 //
 // 1. we unit test the function intercept(chain: Interceptor.Chain): Response. Cons: we need to go into the details
 // of the internals of the okhttp client.
