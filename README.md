@@ -60,5 +60,5 @@ Libraries used:
 * [coil](https://github.com/coil-kt/coil) for images
 * [arrow](https://github.com/arrow-kt/arrow) as a functional companion library, when appropriate/needed
 
-Limited usage of Google's androidx/jetpack stack has been made on purpose (with the exception of the new jetpack compose). This repo is about concepts, not about mastering a particular tech stack. Also, i'm quite opinionated on androidx/jetpack libraries being badly designed, pretty disfunctional, and being just a badly re-invented wheel that could be achieved with better, more general, more re-usable abstractions. 
+Limited usage of Google's androidx/jetpack stack has been made on purpose (with the exception of the new jetpack compose). This repo is about concepts, not about mastering a particular tech stack. Also, i'm quite opinionated on androidx/jetpack libraries being pourly designed, pretty disfunctional, unsounded, flimsy, optimised for toy examples instead of production-ready projects at scale (despite being used in such context!), and in summary being just a badly re-invented wheel that could have been achieved with better, more general, more sounded and re-usable abstractions; ultimately they contribute to make the overall android experience worst instead of better, and they keep the status of android development in the stone age. 
 
