@@ -4,8 +4,8 @@ private fun getOptionalProperty(key: String): String? {
     infix fun String?.or(s : String?) : String? = this ?: s
 
     return (System.getProperty(key) or System.getenv(key))
-        .apply {
-            println("*** Property $key: $this ***")
+        ?.apply {
+            println("*** Property $key: ${this.take(6)} ***")
         }
 
 }
