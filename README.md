@@ -1,7 +1,7 @@
 ![Build](https://github.com/alessandrocandolini/di-alternatives/workflows/Build/badge.svg)
 
 
-# The raise and fall of DI frameworks (in the OOP land)
+# The raise and fall of DI containers (in the OOP land)
 
 Multi-module single platform gradle kotlin/android project, setup using gradle kotlin DSL, to explore pros, cons, rationale and alternatives to dependency injection and dependency injection containers in OOP. 
 
