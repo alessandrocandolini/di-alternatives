@@ -55,7 +55,10 @@ class ApiKeyInterceptor(private val store : ApiKeyStore) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request: Request = chain.request()
-        val url: HttpUrl = request.url.newBuilder().addQueryParameter(API_KEY_QUERY_PARAM, apiKey).build()
+        val url: HttpUrl = request.url.newBuilder()
+            .removeAllQueryParameters(API_KEY_QUERY_PARAM) // <-
+            .addQueryParameter(API_KEY_QUERY_PARAM, apiKey)
+            .build()
         request = request.newBuilder().url(url).build()
         return chain.proceed(request)
     }

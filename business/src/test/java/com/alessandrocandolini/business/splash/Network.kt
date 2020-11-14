@@ -19,9 +19,12 @@ class ApiKeyInterceptorTest : BehaviorSpec({
         val interceptor: Interceptor = ApiKeyInterceptor { aApiKey }
 
         val authDispatcher : (RecordedRequest) -> MockResponse = { request ->
-            val code = when(request.requestUrl?.queryParameterValues(ApiKeyInterceptor.API_KEY_QUERY_PARAM)) {
+            val code = when(val l = request.requestUrl?.queryParameterValues(ApiKeyInterceptor.API_KEY_QUERY_PARAM)) {
                 listOf(aApiKey) -> 200
-                else -> 401
+                else -> {
+                    println("list = $l")
+                    401
+                }
             }
             MockResponse().setResponseCode(code)
         }
@@ -65,11 +68,17 @@ class ApiKeyInterceptorTest : BehaviorSpec({
         `when`("query param is present already in the GET request") {
             then("it should replace the query param") {
                 withMockServer {
-                    val url = fullUrl("/api")
+                    val url = fullUrl("/api?api=test&appid=cacca")
                     val client = OkHttpClient.Builder()
                         .addInterceptor(interceptor)
                         .build()
-                    2 + 2 shouldBe 4
+                    dispatcher = authDispatcher.toDispatcher()
+                    val request: Request = Request.Builder()
+                        .get()
+                        .url(url)
+                        .build()
+                    val r = client.newCall(request).execute()
+                    r.code shouldBe 200
                 }
 
             }
