@@ -26,7 +26,7 @@ interface WeatherApi {
 
 }
 
-interface ApiKeyStore {
+fun interface ApiKeyStore {
     fun fetchKey() : String
 }
 

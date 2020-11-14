@@ -1,8 +1,9 @@
 package com.alessandrocandolini.business
 
-import okhttp3.HttpUrl
+import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import okhttp3.mockwebserver.RecordedRequest
 
 internal fun MockResponse.setBodyFromResource(path: String): MockResponse =
     javaClass.classLoader?.getResource(path)?.readText().let { fileContent ->
@@ -20,3 +21,8 @@ internal fun <V> withMockServer(f: MockWebServer.() -> V): V {
 
 internal fun MockWebServer.fullUrl(path : String) : String = url(path).toString()
 
+internal fun ((RecordedRequest) -> MockResponse).toDispatcher() : Dispatcher =
+    let { block -> object : Dispatcher() {
+        override fun dispatch(request: RecordedRequest): MockResponse = block(request)
+    }
+}
