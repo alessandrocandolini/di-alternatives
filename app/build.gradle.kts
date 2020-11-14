@@ -20,11 +20,16 @@ android {
 
     buildTypes {
         getByName("debug") {
+            buildConfigField("String", "API_KEY", apiKey.escape())
             isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
         }
         getByName("release") {
+            buildConfigField("String", "API_KEY", apiKey.escape())
             isMinifyEnabled = true
             isShrinkResources = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
