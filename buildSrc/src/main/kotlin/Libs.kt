@@ -55,4 +55,8 @@ object Libs {
 
     }
 
+    object Images {
+        const val coil = "io.coil-kt:coil:${Versions.coil}"
+    }
+
 }

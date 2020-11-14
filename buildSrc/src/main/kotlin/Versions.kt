@@ -17,5 +17,7 @@ object Versions {
     const val retrofit = "2.9.0"
     const val retrofitSerializationConverter = "0.8.0"
 
+    const val coil = "1.0.0"
+
 
 }
