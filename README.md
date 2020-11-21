@@ -25,7 +25,7 @@ Although any mobile application will have to touch some (if not all) of the foll
 
 ## Background and motivation
 
-Usage of DI and DI containers has been raising in popularity in Android development these days, and they have been around for ages in Java enterprise. This project is about refreshing these concepts, show how to apply them by leveraging some of the modern libraries and patterns available in the java/kotlin/android ecosystem, illustrate the many benefits that we can get, and at the same time challenge this viewpoint and contribute to the conversation on whether an argument can be made that DI containers should instead be considered as something fixing the symptomps rather than the actual underlying issue, and what the alternatives could be. 
+Usage of DI and DI containers has undergone an increase in popularity in Android development these days, and those things have been around for ages in the Java enterprise world. This project is about refreshing these concepts, show how to apply them by leveraging some of the modern libraries and patterns available in the java/kotlin/android ecosystem (eg, Dagger), illustrate the many benefits that we can get. At the same time though, this project aims at challenging this viewpoint and contribute to the conversation on whether an argument can be made that DI containers should instead be considered as something fixing the symptomps rather than the actual underlying issue, and what the alternatives could be. 
 
 
 Dependency injection (referred to as DI hereafter) is many things. First and foremost, it is an important OOP pattern and concept. 
