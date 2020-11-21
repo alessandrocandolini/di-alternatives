@@ -25,10 +25,10 @@ Although any mobile application will have to touch some (if not all) of the foll
 
 ## Background and motivation
 
-Usage of DI and DI containers has undergone an increase in popularity in Android development these days, and those things have been around for ages in the Java enterprise world. This project is about refreshing these concepts, show how to apply them by leveraging some of the modern libraries and patterns available in the java/kotlin/android ecosystem (eg, Dagger), illustrate the many benefits that we can get. At the same time though, this project aims at challenging this viewpoint and contribute to the conversation on whether an argument can be made that DI containers should instead be considered as something fixing the symptomps rather than the actual underlying issue, and what the alternatives could be. 
+Dependency injection (referred to as DI hereafter) and usage of DI containers has undergone an increase in popularity in Android development these days, and those things have been around for ages in the Java enterprise world. This project is about refreshing these concepts, show how to apply them by leveraging some of the modern libraries and patterns available in the java/kotlin/android ecosystem (eg, Dagger), illustrate the many benefits that we can get. At the same time though, this project aims at challenging this viewpoint and contribute to the conversation on whether an argument can be made that DI containers should instead be considered as something fixing the symptomps rather than the actual underlying issue, and what the alternatives could be. 
 
 
-Dependency injection (referred to as DI hereafter) is many things. First and foremost, it is an important OOP pattern and concept. 
+DI is many things. First and foremost, it is an important OOP pattern and concept. 
 More on this later on, but in short it's about externalising the dependencies of a class (via constructor injection when the dependency is mandatory, or via setters when the dependency is optional). 
 If/when the external dependencies are defined in terms of interfaces designed from the point of view of the consumer (instead of using directly classes, and/or using interfaces that expose an API which is 1:1 with the underlying implementation, ie, an interface leaking the implementation details), it supports inversion of control and it makes the dependencies pluggable from outside.
 Supposedly, this increases (among others): modularity, testability, etc. 
