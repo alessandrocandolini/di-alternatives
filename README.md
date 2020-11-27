@@ -44,6 +44,7 @@ Main technologies used:
 * [kotest](https://kotest.io/) for unit, integration and property-based testing (bye bye junit!)
 * [coil](https://github.com/coil-kt/coil) for images
 * [arrow](https://github.com/arrow-kt/arrow) as a functional companion library, when appropriate/needed
+* [sqldelight](https://github.com/cashapp/sqldelight) for a SQL-first approach to deal with sql DBs
 
 [anvil](https://github.com/square/anvil) is a very interesting approach to scale dagger projects in Kotlin, however here I've decided to try [hint](https://dagger.dev/hilt/). More info on anvil can be found [here](https://developer.squareup.com/blog/introducing-anvil/).
 
