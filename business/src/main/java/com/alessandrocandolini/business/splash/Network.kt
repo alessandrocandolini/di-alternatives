@@ -1,6 +1,5 @@
 package com.alessandrocandolini.business.splash
 
-//import kotlinx.serialization.SerialName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import okhttp3.HttpUrl
@@ -16,8 +15,14 @@ inline class CityId(val id: Int)
 @Serializable
 data class WeatherResponse(
     @SerialName("id")
-    val id: Int  // TODO replace type with CityId
+    val cityId: Int,  // TODO replace type with CityId, inline classes are not yet supported by kotlinx.serialization
+
+    @SerialName("name")
+    val name : String
+
 )
+
+
 
 
 interface WeatherApi {
@@ -55,12 +60,12 @@ class ApiKeyInterceptor(private val store : ApiKeyStore) : Interceptor {
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        var request: Request = chain.request()
-        val url: HttpUrl = request.url.newBuilder()
-            .removeAllQueryParameters(API_KEY_QUERY_PARAM) // <- is this needed? is this overdefensive code?
+        val originalRequest: Request = chain.request()
+        val url: HttpUrl = originalRequest.url.newBuilder()
+            .removeAllQueryParameters(API_KEY_QUERY_PARAM) // <- is this needed? is this over-defensive code?
             .addQueryParameter(API_KEY_QUERY_PARAM, apiKey)
             .build()
-        request = request.newBuilder().url(url).build()
+        val request = originalRequest.newBuilder().url(url).build()
         return chain.proceed(request)
     }
 

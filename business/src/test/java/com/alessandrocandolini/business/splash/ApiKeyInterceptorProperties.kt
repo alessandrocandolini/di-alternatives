@@ -4,10 +4,11 @@ import com.alessandrocandolini.business.hasQueryParamMatching
 import com.alessandrocandolini.business.withMockServer
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.property.Arb
+import io.kotest.property.Exhaustive
 import io.kotest.property.Gen
 import io.kotest.property.arbitrary.*
 import io.kotest.property.checkAll
-import io.kotest.property.internal.proptest
+import io.kotest.property.exhaustive.collection
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -70,14 +71,14 @@ class ApiKeyInterceptorProperties : FunSpec() {
 
             val nonEmptyBodyGen: Arb<String> = Arb.string().filter { it.isNotBlank() }
 
-            val httpUrlGen: Arb<HttpUrl> = Arb.of(
+            val httpUrlGen: Gen<HttpUrl> = Exhaustive.collection(setOf(
                 "api/v1/",
                 "/api?api=test&appid=something",
                 "/api?api=test"
-            ).map { u -> pathToFullUrl(u) }
+            ).map { u -> pathToFullUrl(u) })
 
-            val httpMethodWithBodyGen : Arb<HttpMethod> = Arb.of(HttpMethod.POST, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.PUT)
-            val httpMethodWithoutBodyGen : Arb<HttpMethod> = Arb.of(HttpMethod.GET, HttpMethod.HEAD)
+            val httpMethodWithBodyGen : Gen<HttpMethod> = Exhaustive.collection(setOf(HttpMethod.POST, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.PUT))
+            val httpMethodWithoutBodyGen : Gen<HttpMethod> = Exhaustive.collection(setOf(HttpMethod.GET, HttpMethod.HEAD))
 
             val requestsWithBody: Arb<Request> = Arb.bind(httpUrlGen, httpMethodWithBodyGen, nonEmptyBodyGen) { httpUrl, httpMethod, body ->
                 Request.Builder()
