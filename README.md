@@ -10,7 +10,7 @@ CI/CD style of development is achieved by configuring basic github actions.
 ## What this project is about
 
 * Learn about dependency injection and mainstream techniques and libraries for deal with it at scale; focus will be particularly on the dagger compiler and runtime 
-* Be provocative and challenge the role of DI in modern codebases, showing that DI frameworks are a solution to the sympthoms rather than to the actual underlying problem, and tentative advocate that DI is an antipattern; the aim of this part is to develop a better understanding of how DI fits into a bigger picture (more info about this in the [https://github.com/alessandrocandolini/di-alternatives#background-and-motivation](section below))
+* Be provocative and challenge the role of DI in modern codebases, showing that DI frameworks are a solution to the sympthoms rather than to the actual underlying problem, and tentative advocate that DI is an antipattern; the aim of this part is to develop a better understanding of how DI fits into a bigger picture (more info about this in the [section below](https://github.com/alessandrocandolini/di-alternatives#background-and-motivation]))
 
 ## What this project is NOT about
 
@@ -45,9 +45,9 @@ Main technologies used:
 * [coil](https://github.com/coil-kt/coil) for images
 * [arrow](https://github.com/arrow-kt/arrow) as a functional companion library, when appropriate/needed
 
-[https://github.com/square/anvil](anvil) is a very interesting approach to scale dagger projects in Kotlin, however here I've decided to try [hint](https://dagger.dev/hilt/). More info on anvil can be found [https://developer.squareup.com/blog/introducing-anvil/](here). 
+[anvil](https://github.com/square/anvil) is a very interesting approach to scale dagger projects in Kotlin, however here I've decided to try [hint](https://dagger.dev/hilt/). More info on anvil can be found [here](https://developer.squareup.com/blog/introducing-anvil/).
 
-This project does NOT make usage of [https://github.com/InsertKoinIO/koin](koin). The lack of compile-time safety is already enough as an argument to stop me from taking koin into account for any non-toy project. 
+This project does NOT make usage of [koin](https://github.com/InsertKoinIO/koin). The lack of compile-time safety is already enough as an argument to stop me from taking koin into seriously account (not to mention the fact that should more properly considered a service locator). 
 
 No mocking library has been used on purpose. Mocking in unit tests is arguably an antipattern, but that's a topic for another project ;) 
 
