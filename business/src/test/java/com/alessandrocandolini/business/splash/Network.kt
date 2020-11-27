@@ -12,7 +12,6 @@ import io.kotest.property.Gen
 import io.kotest.property.arbitrary.*
 import io.kotest.property.checkAll
 import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -35,7 +34,7 @@ Example-driven tests follow this structure:
 So, high level,  we have either
    actual == expected
 or
-   verify(mock.doSoemthing(someData), times(1))
+   verify(mock.doSomething(someData), times(1))
 
 Pros and cons of example-driven tests:
    Pro:
@@ -98,6 +97,16 @@ In the case of the interceptor, the property that DEFINES our interceptor (the r
 For every request (no matter what the http verb, headers, body, path, query params are), the request without
 interceptor should always have response code 401 and the request performed with a client having the interceptor should instead
 return 200.
+
+
+-----
+
+I think the values of PBTs are primarily:
+* the way you express the test: it makes you think in terms of foundational, stronger, core properties of what you are building, that should represent your component and must be satisfied regardless of the inputs. When you start thinking and designing at such level of abstraction, when you start having an appreciation for stronger properties, you tend to write code that has clearer goals, strong behaviour, precise requirements, well defined boundaries, well understood behaviour, etc. Those properties express your expectations on the software at a scale at which you are not required to come up by yourself with a list of examples that hopefully cover all the scenarios. Instead of reasoning in terms of "finding the examples", you reason in terms of properties that you know must be true no matter what, and you delegate to the PBT engine to exercise the system in search for violations of the expected behaviour. You stress the integrity of your expectations much more in depth. So, even when few of the inputs are still manually plugged  (in our case, urls are still picked from a list of hardcoded ones, to simplify the generator; body and http methods are totally generic though), there is still value in the way you express the properties and the way you separate those from the actual source of data. It's powerful to isolate properties that should hold regardless of the actual data, you start reasoning at a higher level of abstraction
+* it's cheaper: our PBT is only one test in this case, but it covers much more than the individual arbitrary example tests that we have written before, one test replaces the need of many example tests while still capturing the essence of the component that we are testing
+So in general PBT lead to fewer, cheaper, and at the same time stronger tests :slightly_smiling_face:
+PBT is not always possible (as i mentioned), and sometimes it's not the right technique to use. BUt it's a nice tool to have in your toolkit for those cases where it leads to cheaper and safer code
+
 */
 
 
@@ -203,18 +212,18 @@ class ApiKeyInterceptorExampleTestPropertyTest : FunSpec() {
     init {
         test("For every request (no matter what the http verb, headers, body, path, query params are), request with no interceptor plugged should return 401 & request with interceptor plugged should return 200") {
 
-            val unauthenticatedClient = OkHttpClient.Builder().build()
-            val authenticatedClient =
-                unauthenticatedClient.newBuilder().addInterceptor(interceptor).build()
+            val clientWithoutInterceptor = OkHttpClient.Builder().build()
+            val clientWithInterceptor =
+                clientWithoutInterceptor.newBuilder().addInterceptor(interceptor).build()
 
             val requestGen: Gen<Request> = requestGen { server.url(it) }
 
             checkAll(requestGen) { request ->
 
-                val unauthenticatedResponse = unauthenticatedClient.newCall(request).execute()
-                val authenticatedResponse = authenticatedClient.newCall(request).execute()
+                val r1 = clientWithoutInterceptor.newCall(request).execute()
+                val r2 = clientWithInterceptor.newCall(request).execute()
 
-                unauthenticatedResponse.code == 401 && authenticatedResponse.code == 200
+                r1.code == 401 && r2.code == 200
 
             }
 

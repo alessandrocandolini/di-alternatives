@@ -1,6 +1,7 @@
 package com.alessandrocandolini.business.splash
 
 //import kotlinx.serialization.SerialName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
@@ -12,9 +13,9 @@ import retrofit2.http.Query
 
 inline class CityId(val id: Int)
 
-//@Serializable
+@Serializable
 data class WeatherResponse(
-//    @SerialName("id")
+    @SerialName("id")
     val id: Int  // TODO replace type with CityId
 )
 
