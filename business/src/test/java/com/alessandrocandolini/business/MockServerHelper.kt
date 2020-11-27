@@ -1,6 +1,6 @@
 package com.alessandrocandolini.business
 
-import okhttp3.Request
+import io.kotest.core.test.TestContext
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -11,13 +11,38 @@ internal fun MockResponse.setBodyFromResource(path: String): MockResponse =
         setBody(fileContent ?: "")
     }
 
-internal fun <V> withMockServer(f: MockWebServer.() -> V): V {
-    val s = MockWebServer().apply {
-        start()
+internal suspend fun <V> TestContext.withMockServer(test: suspend TestContext.(MockWebServer) -> V): V =
+    withMockServer(
+        setup = { s ->
+            s.start()
+        },
+        tierDown = { s ->
+            s.shutdown()
+        },
+        test
+    )
+
+internal suspend fun <V> TestContext.withMockServer(dispatcher : Dispatcher, test: suspend TestContext.(MockWebServer) -> V): V =
+    withMockServer(
+        setup = { s ->
+            s.start()
+            s.dispatcher = dispatcher
+        },
+        tierDown = { s ->
+            s.shutdown()
+        },
+        test
+    )
+
+
+private suspend fun <V> TestContext.withMockServer(setup : (MockWebServer) -> Unit, tierDown : (MockWebServer) -> Unit, test: suspend TestContext.(MockWebServer) -> V): V {
+    val s = MockWebServer()
+    return try {
+        setup(s)
+        test(s)
+    } finally {
+        tierDown(s)
     }
-    val r = s.run(f)
-    s.shutdown()
-    return r
 }
 
 internal fun ((RecordedRequest) -> MockResponse).toDispatcher() : Dispatcher =
@@ -25,3 +50,9 @@ internal fun ((RecordedRequest) -> MockResponse).toDispatcher() : Dispatcher =
         override fun dispatch(request: RecordedRequest): MockResponse = block(request)
     }
 }
+
+internal fun RecordedRequest.hasQueryParamMatching(key : String , expectedValue : String) : Boolean =
+    when (requestUrl?.queryParameterValues(key)) {
+        listOf(expectedValue) -> true
+        else -> false
+    }

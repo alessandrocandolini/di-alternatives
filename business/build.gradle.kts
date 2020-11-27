@@ -16,6 +16,7 @@ tasks.withType<Test> {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
+        jvmTarget = "1.8"
         freeCompilerArgs = freeCompilerArgs + listOfNotNull(
             "-Xuse-experimental=kotlin.ExperimentalUnsignedTypes",
             "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
