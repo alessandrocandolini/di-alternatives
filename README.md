@@ -35,7 +35,7 @@ DI frameworks has effectively solved problems in organising dependencies in larg
 
 ## Tech stack 
 
-Libraries used:
+Main technologies used: 
 * [kotlin standard library for JVM](https://kotlinlang.org/api/latest/jvm/stdlib/) 
 * [kotlin coroutines](https://github.com/Kotlin/kotlinx.coroutines) (including coroutines testing) 
 * [kotlin serialization](https://github.com/Kotlin/kotlinx.serialization) for json parsing
