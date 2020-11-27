@@ -27,25 +27,11 @@ Although any mobile application will have to touch some (if not all) of the foll
 
 Dependency injection (referred to as DI hereafter) and usage of DI containers has undergone an increase in popularity in Android development these days, and those things have been around for ages in the Java enterprise world. This project is about refreshing these concepts, show how to apply them by leveraging some of the modern libraries and patterns available in the java/kotlin/android ecosystem (eg, Dagger), illustrate the many benefits that we can get. At the same time though, this project aims at challenging this viewpoint and contribute to the conversation on whether an argument can be made that DI containers should instead be considered as something fixing the symptomps rather than the actual underlying issue, and what the alternatives could be. 
 
-
-DI is many things. First and foremost, it is an important OOP pattern and concept. 
-More on this later on, but in short it's about externalising the dependencies of a class (via constructor injection when the dependency is mandatory, or via setters when the dependency is optional). 
-If/when the external dependencies are defined in terms of interfaces designed from the point of view of the consumer (instead of using directly classes, and/or using interfaces that expose an API which is 1:1 with the underlying implementation, ie, an interface leaking the implementation details), it supports inversion of control and it makes the dependencies pluggable from outside.
-Supposedly, this increases (among others): modularity, testability, etc. 
-Why is this? Because, at least **virtually**, it makes possible to replace / override the dependencies from outside, without having to touch the class code. 
-Why am I saying **virtually**? I'll expand later however the main point here is that dependencies are not just signatures of the methods of an interface: there is also **behaviour** associated with those methods, and you have to be careful when replacing an external dependency to fulfill the expectations in terms of **behaviour**, not just about whether the signatures match.
-
-Indeed, in OOP land there are plenty of advantages in using DI, compared to more naive and less modular solutions. 
-
-Systematic adoption of the DI pattern typically leads to a proliferation of classes, and DI containers (eg, libraries/frameworks like dagger, guice, in the Java land, etc) have been invented to help mitigating the growing cost of managing the dependency graph in larger scale projects. 
-The aim of these tools is complementaty to the usage of the DI pattern: they to resolve the dependency graph (either at runtime or compile time, depending on the tool). 
-
-This has been the state of art of Java DI for many years. From `@@Autowired` in Spring framework since Spring 2.5 for annotations-driven dependency resolution and injection of collaborating beans, to `@Inject` and `@Orovides` annotations finally landing in `javax` itself to ensure class portability, to the advent of many Java production-ready DI containers  ike guice, dagger and others, DI tools have become a standard in the development of OOP applications at non-trivial scale. 
-Over the last years, the approach has gained lot of attraction in the mobile community. 
+From `@@Autowired` in Spring framework since Spring 2.5 for annotations-driven dependency resolution and injection of collaborating beans, to `@Inject` and `@Orovides` annotations finally landing in `javax` itself to ensure class portability, to the advent of many Java production-ready DI containers  like [https://github.com/google/guice](guice), [https://dagger.dev/](dagger2) and others, DI tools have become a standard in the development of OOP applications at non-trivial scale. 
+Over the last years, the approach has gained lot of attraction in the mobile community too. 
 Despite the enormous popularity of this approach though, it's probably time to question and rethink the approach andfrom the ground up and ask whether there are better alternatives DI. 
 Let's look at DI with more provocative eyeglasses: What is the problem that DI is trying to solve? Is DI really solving it, or is just creating more problems? Is DI a code smell/antipattern? 
-DI frameworks has effectively solved problems in organising dependencies in larger scale OOP codebases, but it's always worth trying to look at different directions and put DI in perspective, instead of being sold to only one technique. 
-
+DI frameworks has effectively solved problems in organising dependencies in larger scale OOP codebases (do they?), but it's always worth trying to look at different directions and put DI in perspective, instead of being sold to only one technique. After reviewing the basics of DI containers, this will drive us to explore the territory of coherent type classes for compiler-enabled dependency injection. 
 
 ## Tech stack 
 
@@ -54,8 +40,8 @@ Libraries used:
 * [kotlin standard library for JVM](https://kotlinlang.org/api/latest/jvm/stdlib/) 
 * [kotlin coroutines](https://github.com/Kotlin/kotlinx.coroutines) (including coroutines testing) 
 * [kotlin serialization](https://github.com/Kotlin/kotlinx.serialization) for json parsing
-* Square's [retrofit2](https://square.github.io/retrofit/) and [okttp](https://square.github.io/okhttp/) (including mock server) 
-* [dagger](https://dagger.dev/dev-guide/) and particularly [hint](https://dagger.dev/hilt/) for DI 
+* [retrofit2](https://square.github.io/retrofit/) and [okttp3](https://square.github.io/okhttp/) (including mock server) 
+* [dagger2](https://dagger.dev/dev-guide/) and particularly [hint](https://dagger.dev/hilt/) for DI 
 * [kotest](https://kotest.io/) for unit, integration and property-based testing (bye bye junit!)
 * [coil](https://github.com/coil-kt/coil) for images
 * [arrow](https://github.com/arrow-kt/arrow) as a functional companion library, when appropriate/needed
@@ -66,3 +52,25 @@ No mocking library has been made on purpose. (Mocking in unit tests is arguably 
 
 Limited usage of Google's androidx/jetpack stack has been made on purpose (with the exception of the new jetpack compose). This repo is about concepts, not about mastering a particular tech stack. Also, i'm quite opinionated on androidx/jetpack libraries being pourly designed, pretty disfunctional, unsounded, flimsy, optimised for toy examples instead of production-ready projects at scale (despite being used in such context!), and in summary being just a badly re-invented wheel that could have been achieved with better, more general, more sounded and re-usable abstractions; ultimately they contribute to make the overall android experience worst instead of better, and they keep the status of android development in the stone age. 
 
+## How to 
+
+Compile:
+```
+./gradlew assembleDebug
+./gradlew assembleRelease
+```
+
+Run `kotest` tests in Java-only modules using the `kotest` custom test runner 
+```
+./gradlew :business:kotest
+```
+
+To run all tests across all modules, using junit runner
+```
+./gradlew test
+```
+
+To check if upgrades of the dependencies are available (thanks to the [https://github.com/ben-manes/gradle-versions-plugin](gradle versions plugin)) 
+```
+./gradlew checkDependencyUpdates
+```
