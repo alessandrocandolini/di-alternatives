@@ -10,7 +10,7 @@ CI/CD style of development is achieved by configuring basic github actions.
 ## What this project is about
 
 * Learn about dependency injection and mainstream techniques and libraries for deal with it at scale; focus will be particularly on the dagger compiler and runtime 
-* Be provocative and challenge the role of DI in modern codebases, showing that DI frameworks are a solution to the sympthoms rather than to the actual underlying problem, and tentative advocate that DI is an antipattern; the aim of this part is to develop a better understanding of how DI fits into a bigger picture (more info about this in the section below 
+* Be provocative and challenge the role of DI in modern codebases, showing that DI frameworks are a solution to the sympthoms rather than to the actual underlying problem, and tentative advocate that DI is an antipattern; the aim of this part is to develop a better understanding of how DI fits into a bigger picture (more info about this in the [https://github.com/alessandrocandolini/di-alternatives#background-and-motivation](section below))
 
 ## What this project is NOT about
 
@@ -31,7 +31,7 @@ From `@Autowired` available in Spring framework to achieve annotations-driven (r
 Over the last years, the approach has gained lot of attraction in the mobile community too. 
 Despite the enormous popularity of this approach though, it's probably time to question and rethink the approach andfrom the ground up and ask whether there are better alternatives DI. 
 Let's look at DI with more provocative eyeglasses: What is the problem that DI is trying to solve? Is DI really solving it, or is just creating more problems? Is DI a code smell/antipattern? 
-DI frameworks has effectively solved problems in organising dependencies in larger scale OOP codebases (do they?), but it's always worth trying to look at different directions and put DI in perspective, instead of being sold to only one technique. After reviewing the basics of DI containers, this will drive us to explore the territory of **coherent type classes for compiler-enabled automatic dependency injection**. 
+DI frameworks has effectively solved problems in organising dependencies in larger scale OOP codebases (do they?), but it's always worth trying to look at different directions and put DI in perspective, instead of being sold to only one technique. After showcase the basics of DI containers, this will drive us to explore the territory of **coherent type classes for compiler-enabled automatic dependency injection**. 
 
 ## Tech stack 
 
