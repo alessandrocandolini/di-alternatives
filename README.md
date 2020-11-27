@@ -33,9 +33,7 @@ Despite the enormous popularity of this approach though, it's probably time to q
 Let's look at DI with more provocative eyeglasses: What is the problem that DI is trying to solve? Is DI really solving it, or is just creating more problems? Is DI a code smell/antipattern? 
 DI frameworks has effectively solved problems in organising dependencies in larger scale OOP codebases (do they?), but it's always worth trying to look at different directions and put DI in perspective, instead of being sold to only one technique. After reviewing the basics of DI containers, this will drive us to explore the territory of **coherent type classes for compiler-enabled automatic dependency injection**. 
 
-## Tech stack (Opinionated) 
-
-Opinionated section. Opinions shared here are mine. 
+## Tech stack 
 
 Libraries used:
 * [kotlin standard library for JVM](https://kotlinlang.org/api/latest/jvm/stdlib/) 
@@ -49,11 +47,11 @@ Libraries used:
 
 [https://github.com/square/anvil](anvil) is a very interesting approach to scale dagger projects in Kotlin, however here I've decided to give it a try to [hint](https://dagger.dev/hilt/)
 
-This project does NOT make usage of [https://github.com/InsertKoinIO/koin](koin). The lack of compile-time safety is already enough as an argument to stop me from taking in account koin for any non-toy project. 
+This project does NOT make usage of [https://github.com/InsertKoinIO/koin](koin). The lack of compile-time safety is already enough as an argument to stop me from taking koin into account for any non-toy project. 
 
 No mocking library has been used on purpose. Mocking in unit tests is arguably an antipattern, but that's a topic for another project ;) 
 
-Limited usage of Google's androidx/jetpack stack has been made on purpose (with the exception of the new jetpack compose). This repo is about concepts, not about mastering a particular tech stack. Also, i'm quite opinionated on androidx/jetpack libraries being pourly designed, pretty disfunctional, unsounded, flimsy, optimised for toy examples instead of production-ready projects at scale (despite being used in such context!), and in summary being just a badly re-invented wheel that could have been achieved with better, more general, more sounded and re-usable abstractions; ultimately they contribute to make the overall android experience worst instead of better, and they keep the status of android development in the stone age. 
+Limited usage of Google's androidx/jetpack stack has been made on purpose (with the exception of the new jetpack compose). This repo is about concepts, not about mastering a particular tech stack. Also, despite the fact that i rarely have strong opinions on libraries and tools (i have preferences but i rarely have strong opinions), i'm instead quite opinionated on androidx/jetpack libraries being pourly designed, pretty disfunctional, unsounded, flimsy, optimised for toy examples instead of production-ready projects at scale (despite being used in such context!), and in summary being just a badly re-invented wheel that could have been achieved with better, more general, more sounded and re-usable abstractions; ultimately they contribute to make the overall android experience worst instead of better, and they keep the status of android development in the stone age. 
 
 ## How to 
 
