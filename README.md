@@ -45,7 +45,7 @@ Main technologies used:
 * [coil](https://github.com/coil-kt/coil) for images
 * [arrow](https://github.com/arrow-kt/arrow) as a functional companion library, when appropriate/needed
 
-[https://github.com/square/anvil](anvil) is a very interesting approach to scale dagger projects in Kotlin, however here I've decided to give it a try to [hint](https://dagger.dev/hilt/)
+[https://github.com/square/anvil](anvil) is a very interesting approach to scale dagger projects in Kotlin, however here I've decided to try [hint](https://dagger.dev/hilt/). More info on anvil can be found [https://developer.squareup.com/blog/introducing-anvil/](here). 
 
 This project does NOT make usage of [https://github.com/InsertKoinIO/koin](koin). The lack of compile-time safety is already enough as an argument to stop me from taking koin into account for any non-toy project. 
 
