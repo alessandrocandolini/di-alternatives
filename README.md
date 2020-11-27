@@ -54,7 +54,7 @@ Limited usage of Google's androidx/jetpack stack has been made on purpose (with 
 
 ## How to 
 
-Compile:
+Compilation pipeline to package the final Android application apk:
 ```
 ./gradlew assembleDebug
 ./gradlew assembleRelease
