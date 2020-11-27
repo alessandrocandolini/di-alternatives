@@ -3,7 +3,7 @@
 
 # The raise and fall of DI containers (in the OOP land)
 
-Multi-module single platform gradle kotlin/android project, setup using gradle kotlin DSL, to explore pros, cons, rationale and alternatives to dependency injection and dependency injection containers in OOP. 
+Multi-module mono-platform gradle kotlin/android project, setup using gradle kotlin DSL, to explore pros, cons, rationale and alternatives to dependency injection and dependency injection containers in OOP. 
 
 CI/CD style of development is achieved by configuring basic github actions. 
 
