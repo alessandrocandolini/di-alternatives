@@ -1,5 +1,6 @@
 package com.alessandrocandolini.business
 
+import okhttp3.Request
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
