@@ -31,7 +31,7 @@ From `@Autowired` available in Spring framework to achieve annotations-driven de
 Over the last years, the approach has gained lot of attraction in the mobile community too. 
 Despite the enormous popularity of this approach though, it's probably time to question and rethink the approach andfrom the ground up and ask whether there are better alternatives DI. 
 Let's look at DI with more provocative eyeglasses: What is the problem that DI is trying to solve? Is DI really solving it, or is just creating more problems? Is DI a code smell/antipattern? 
-DI frameworks has effectively solved problems in organising dependencies in larger scale OOP codebases (do they?), but it's always worth trying to look at different directions and put DI in perspective, instead of being sold to only one technique. After reviewing the basics of DI containers, this will drive us to explore the territory of coherent type classes for compiler-enabled dependency injection. 
+DI frameworks has effectively solved problems in organising dependencies in larger scale OOP codebases (do they?), but it's always worth trying to look at different directions and put DI in perspective, instead of being sold to only one technique. After reviewing the basics of DI containers, this will drive us to explore the territory of **coherent type classes for compiler-enabled automatic dependency injection**. 
 
 ## Tech stack 
 
