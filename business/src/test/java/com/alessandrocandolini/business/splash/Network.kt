@@ -1,22 +1,23 @@
 package com.alessandrocandolini.business.splash
 
-import com.alessandrocandolini.business.fullUrl
 import com.alessandrocandolini.business.toDispatcher
 import com.alessandrocandolini.business.withMockServer
-import com.alessandrocandolini.business.withMockServer2
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.core.test.TestCase
+import io.kotest.core.test.TestResult
 import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.Gen
 import io.kotest.property.arbitrary.*
-import io.kotest.property.forAll
+import io.kotest.property.checkAll
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
 
 /*
@@ -107,15 +108,13 @@ class ApiKeyInterceptorExampleTest : BehaviorSpec({
         val aApiKey = "I'm a valid api key"
         val interceptor: Interceptor = ApiKeyInterceptor { aApiKey }
 
-        val authDispatcher : (RecordedRequest) -> MockResponse = { request ->
-            val code = when(val l = request.requestUrl?.queryParameterValues(ApiKeyInterceptor.API_KEY_QUERY_PARAM)) {
+        val authDispatcher: (RecordedRequest) -> MockResponse = { request ->
+            when (request.requestUrl?.queryParameterValues(ApiKeyInterceptor.API_KEY_QUERY_PARAM)) {
                 listOf(aApiKey) -> 200
-                else -> {
-                    println("list = $l")
-                    401
-                }
+                else -> 401
+            }.let { code ->
+                MockResponse().setResponseCode(code)
             }
-            MockResponse().setResponseCode(code)
         }
 
         `when`("query param is not present in the GET request and the interceptor is not plugged") {
@@ -123,11 +122,11 @@ class ApiKeyInterceptorExampleTest : BehaviorSpec({
                 withMockServer {
 
                     val client = OkHttpClient.Builder().build()
-                    val url = fullUrl("/api?api=test")
+                    val fullUrl = url("/api?api=test")
                     dispatcher = authDispatcher.toDispatcher()
                     val request: Request = Request.Builder()
                         .get()
-                        .url(url)
+                        .url(fullUrl)
                         .build()
                     val r = client.newCall(request).execute()
                     r.code shouldBe 401
@@ -139,11 +138,11 @@ class ApiKeyInterceptorExampleTest : BehaviorSpec({
             then("it should append the query param") {
                 withMockServer {
                     val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-                    val url = fullUrl("/api?api=test")
+                    val fullUrl = url("/api?api=test")
                     dispatcher = authDispatcher.toDispatcher()
                     val request: Request = Request.Builder()
                         .get()
-                        .url(url)
+                        .url(fullUrl)
                         .build()
                     val r = client.newCall(request).execute()
                     r.code shouldBe 200
@@ -155,14 +154,14 @@ class ApiKeyInterceptorExampleTest : BehaviorSpec({
         `when`("query param is present already in the GET request") {
             then("it should replace the query param") {
                 withMockServer {
-                    val url = fullUrl("/api?api=test&appid=something")
+                    val fullUrl = url("/api?api=test&appid=something")
                     val client = OkHttpClient.Builder()
                         .addInterceptor(interceptor)
                         .build()
                     dispatcher = authDispatcher.toDispatcher()
                     val request: Request = Request.Builder()
                         .get()
-                        .url(url)
+                        .url(fullUrl)
                         .build()
                     val r = client.newCall(request).execute()
                     r.code shouldBe 200
@@ -174,72 +173,89 @@ class ApiKeyInterceptorExampleTest : BehaviorSpec({
 
 })
 
-class ApiKeyInterceptorExampleTestPropertyTest : FunSpec({
+class ApiKeyInterceptorExampleTestPropertyTest : FunSpec() {
 
-    test("String length should return the length of the string") {
+    private val server = MockWebServer()
+    private val aApiKey = "I'm a valid api key"
+    private val interceptor: Interceptor = ApiKeyInterceptor { aApiKey }
 
-        withMockServer2 { s ->
-
-            val aApiKey = "I'm a valid api key"
-            val interceptor: Interceptor = ApiKeyInterceptor { aApiKey }
-
-            val authDispatcher: (RecordedRequest) -> MockResponse = { request ->
-                val code = when (val l =
-                    request.requestUrl?.queryParameterValues(ApiKeyInterceptor.API_KEY_QUERY_PARAM)) {
-                    listOf(aApiKey) -> 200
-                    else -> 401
-                }
+    override fun beforeTest(testCase: TestCase) {
+        super.beforeTest(testCase)
+        val authDispatcher: (RecordedRequest) -> MockResponse = { request ->
+            when (request.requestUrl?.queryParameterValues(ApiKeyInterceptor.API_KEY_QUERY_PARAM)) {
+                listOf(aApiKey) -> 200
+                else -> 401
+            }.let { code ->
                 MockResponse().setResponseCode(code)
             }
+        }
 
-            s.dispatcher = authDispatcher.toDispatcher()
+        server.dispatcher = authDispatcher.toDispatcher()
+        server.start()
+    }
+
+    override fun afterTest(testCase: TestCase, result: TestResult) {
+        super.afterTest(testCase, result)
+        server.shutdown()
+    }
+
+
+    init {
+        test("For every request (no matter what the http verb, headers, body, path, query params are), request without interceptor should be unauthenticated & request with interceptor should be authenticated") {
 
             val unauthenticatedClient = OkHttpClient.Builder().build()
             val authenticatedClient =
                 unauthenticatedClient.newBuilder().addInterceptor(interceptor).build()
 
+            val requestGen: Gen<Request> = requestGen { server.url(it) }
 
-            val property: (Request) -> Boolean = { request ->
+            checkAll(requestGen) { request ->
+
                 val unauthenticatedResponse = unauthenticatedClient.newCall(request).execute()
                 val authenticatedResponse = authenticatedClient.newCall(request).execute()
 
                 unauthenticatedResponse.code == 401 && authenticatedResponse.code == 200
-                true
+
             }
-
-            val rGen : Gen<Request> = requestGen { s.fullUrl(it) }
-
-            forAll(rGen) { r -> property(r) }
 
         }
     }
-})
-fun requestGen(pathToFullUrl : (String) -> HttpUrl) : Gen<Request> {
+}
 
-    val bodyGen : Gen<String> = Arb.string()
+fun requestGen(pathToFullUrl: (String) -> HttpUrl): Gen<Request> {
 
-    val pathQueryGen : Gen<HttpUrl> = Arb.of(
+    val bodyGen: Arb<String> = Arb.string()
+
+    val pathQueryGen: Arb<HttpUrl> = Arb.of(
         "api/v1/",
         "/api?api=test&appid=something",
         "/api?api=test"
     ).map { u -> pathToFullUrl(u) }
 
-    val postGen: Gen<Request> = Arb.bind(pathQueryGen, bodyGen) { url , body ->
+    val postGen: Gen<Request> = Arb.bind(pathQueryGen, bodyGen) { url, body ->
         Request.Builder()
             .post(body.toRequestBody())
             .url(url)
             .build()
     }
 
-    val patchGen  : Gen<Request> = Arb.bind(pathQueryGen, bodyGen) { httpUrl , body ->
+    val patchGen: Gen<Request> = Arb.bind(pathQueryGen, bodyGen) { httpUrl, body ->
         Request.Builder()
             .patch(body.toRequestBody())
             .url(httpUrl)
             .build()
     }
 
+    val getGen: Gen<Request> = pathQueryGen.map { httpUrl ->
+        Request.Builder()
+            .get()
+            .url(httpUrl)
+            .build()
+    }
+
     return Arb.choice(
-        postGen, patchGen)
+        postGen, patchGen, getGen
+    )
 
 }
 
