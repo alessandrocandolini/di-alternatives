@@ -1,5 +1,6 @@
 package com.alessandrocandolini.business
 
+import okhttp3.HttpUrl
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -19,7 +20,16 @@ internal fun <V> withMockServer(f: MockWebServer.() -> V): V {
     return r
 }
 
-internal fun MockWebServer.fullUrl(path : String) : String = url(path).toString()
+internal suspend fun <V> withMockServer2(f: suspend (MockWebServer) -> V): V {
+    val s = MockWebServer().apply {
+        start()
+    }
+    val r = f(s)
+    s.shutdown()
+    return r
+}
+
+internal fun MockWebServer.fullUrl(path : String) : HttpUrl = url(path)
 
 internal fun ((RecordedRequest) -> MockResponse).toDispatcher() : Dispatcher =
     let { block -> object : Dispatcher() {

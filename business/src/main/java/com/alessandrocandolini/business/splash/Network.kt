@@ -56,7 +56,7 @@ class ApiKeyInterceptor(private val store : ApiKeyStore) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request: Request = chain.request()
         val url: HttpUrl = request.url.newBuilder()
-            .removeAllQueryParameters(API_KEY_QUERY_PARAM) // <-
+            .removeAllQueryParameters(API_KEY_QUERY_PARAM) // <- is this needed? is this overdefensive code?
             .addQueryParameter(API_KEY_QUERY_PARAM, apiKey)
             .build()
         request = request.newBuilder().url(url).build()
