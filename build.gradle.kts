@@ -7,6 +7,7 @@ buildscript {
     }
     dependencies {
         classpath ("com.android.tools.build:gradle:4.2.0-alpha16")
+        classpath (  "com.google.dagger:hilt-android-gradle-plugin:${Versions.hint}")
         classpath(kotlin("gradle-plugin", version = Versions.kotlin))
     }
 }

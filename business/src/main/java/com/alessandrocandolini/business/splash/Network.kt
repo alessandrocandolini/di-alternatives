@@ -8,7 +8,7 @@ import okhttp3.Request
 import okhttp3.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-
+import javax.inject.Inject
 
 inline class CityId(val id: Int)
 
@@ -36,10 +36,7 @@ fun interface ApiKeyStore {
     fun fetchKey() : String
 }
 
-// This is the interesting part: this can only be provided in the app module
-//class ApiKeyStoreFromSystem : ApiKeyStore {
-//    override fun fetchKey() : String = BuildConfig.API_KEY
-//}
+
 
 // how to test this?
 // We have several options:
@@ -53,7 +50,7 @@ fun interface ApiKeyStore {
 // 3. we can check how the interceptor will change the okhttp behhaviour using the same instance of okhttp used in prod ,
 // to validate whether this works with a setup close to prod, and to check if the interceptor plays well with other interceptors and/or components
 
-class ApiKeyInterceptor(private val store : ApiKeyStore) : Interceptor {
+class ApiKeyInterceptor @Inject constructor(private val store : ApiKeyStore) : Interceptor {
 
     private val apiKey : String by lazy {
         store.fetchKey()

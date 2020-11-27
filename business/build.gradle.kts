@@ -41,7 +41,7 @@ dependencies {
     // migrate okhttp to a different module, don't use business to do networking
     implementation(Libs.Http.okhttp)
     implementation(Libs.Http.retrofit)
-    implementation(Libs.Http.retrofitSerializationAdapter)
+    testImplementation(Libs.Http.retrofitSerializationAdapter)
     implementation(Libs.Kotlin.serialization)
     testImplementation(Libs.Http.okhttpMockWebServer)
 
@@ -49,6 +49,9 @@ dependencies {
     implementation(Libs.Arrow.core)
     implementation(Libs.Arrow.syntax)
     kapt(Libs.Arrow.meta)
+
+    // DI
+    implementation("javax.inject:javax.inject:1")
 
     testImplementation(Libs.Kotlin.Coroutines.test)
     testImplementation(Libs.Kotest.core)

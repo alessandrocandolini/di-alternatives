@@ -3,6 +3,8 @@ plugins {
     kotlin("android")
     id("com.adarshr.test-logger")
     id("name.remal.check-dependency-updates")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -82,6 +84,14 @@ dependencies {
     implementation(Libs.AndroidX.Compose.material)
     implementation(Libs.AndroidX.Compose.runtime)
     implementation(Libs.AndroidX.Compose.tooling)
+
+    implementation(Libs.Http.okhttp)
+    implementation(Libs.Http.retrofit)
+    implementation(Libs.Http.retrofitSerializationAdapter)
+    implementation(Libs.Kotlin.serialization)
+
+    implementation(Libs.Dagger.hintAndroid)
+    kapt(Libs.Dagger.hintAndroidCompiler)
 
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")

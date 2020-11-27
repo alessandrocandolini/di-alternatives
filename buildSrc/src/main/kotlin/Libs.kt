@@ -55,6 +55,11 @@ object Libs {
 
     }
 
+    object Dagger {
+        const val hintAndroid = "com.google.dagger:hilt-android:${Versions.hint}"
+        const val hintAndroidCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hint}"
+    }
+
     object Images {
         const val coil = "io.coil-kt:coil:${Versions.coil}"
     }
