@@ -1,7 +1,7 @@
-package com.alessandrocandolini.business.splash
+package com.alessandrocandolini.splash
 
-import com.alessandrocandolini.business.toDispatcher
-import com.alessandrocandolini.business.withMockServer
+import com.alessandrocandolini.toDispatcher
+import com.alessandrocandolini.withMockServer
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import okhttp3.Interceptor

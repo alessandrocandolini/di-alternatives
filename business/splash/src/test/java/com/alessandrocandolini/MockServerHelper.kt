@@ -1,4 +1,4 @@
-package com.alessandrocandolini.business
+package com.alessandrocandolini
 
 import io.kotest.core.test.TestContext
 import okhttp3.mockwebserver.Dispatcher

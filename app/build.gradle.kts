@@ -71,7 +71,7 @@ tasks.withType<Test> {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(project(":business"))
+    implementation(project(":business:splash"))
 
     implementation(Libs.Kotlin.standardLib)
     implementation(Libs.Kotlin.Coroutines.core)

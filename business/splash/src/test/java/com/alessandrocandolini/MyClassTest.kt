@@ -1,4 +1,4 @@
-package com.alessandrocandolini.business;
+package com.alessandrocandolini;
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.spec.style.StringSpec

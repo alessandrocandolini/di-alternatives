@@ -1,7 +1,7 @@
 package com.alessandrocandolini.di_alternatives.di
 
 import android.util.Log
-import com.alessandrocandolini.business.splash.Logger
+import com.alessandrocandolini.splash.Logger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

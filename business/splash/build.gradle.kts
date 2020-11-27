@@ -20,6 +20,7 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs = freeCompilerArgs + listOfNotNull(
             "-Xuse-experimental=kotlin.ExperimentalUnsignedTypes",
             "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xuse-experimental=kotlinx.serialization.ExperimentalSerializationApi",
             "-XXLanguage:+InlineClasses"
         )
     }

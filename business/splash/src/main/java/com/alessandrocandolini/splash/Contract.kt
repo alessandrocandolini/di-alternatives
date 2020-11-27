@@ -1,4 +1,4 @@
-package com.alessandrocandolini.business.splash
+package com.alessandrocandolini.splash
 
 interface View
 

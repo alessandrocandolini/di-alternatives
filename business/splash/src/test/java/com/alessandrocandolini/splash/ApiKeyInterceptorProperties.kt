@@ -1,7 +1,7 @@
-package com.alessandrocandolini.business.splash
+package com.alessandrocandolini.splash
 
-import com.alessandrocandolini.business.hasQueryParamMatching
-import com.alessandrocandolini.business.withMockServer
+import com.alessandrocandolini.hasQueryParamMatching
+import com.alessandrocandolini.withMockServer
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.property.Arb
 import io.kotest.property.Exhaustive

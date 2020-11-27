@@ -1,4 +1,4 @@
-package com.alessandrocandolini.business.splash
+package com.alessandrocandolini.splash
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

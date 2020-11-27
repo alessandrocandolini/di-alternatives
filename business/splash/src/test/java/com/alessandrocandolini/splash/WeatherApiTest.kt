@@ -1,6 +1,6 @@
-package com.alessandrocandolini.business.splash
+package com.alessandrocandolini.splash
 
-import com.alessandrocandolini.business.withMockServer
+import com.alessandrocandolini.withMockServer
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldBeIn

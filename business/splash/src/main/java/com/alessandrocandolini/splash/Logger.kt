@@ -1,4 +1,4 @@
-package com.alessandrocandolini.business.splash
+package com.alessandrocandolini.splash
 
 interface Logger {
     fun warn(tag : String, message : String)
