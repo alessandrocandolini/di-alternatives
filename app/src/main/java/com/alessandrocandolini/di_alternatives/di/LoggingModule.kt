@@ -13,6 +13,14 @@ class LoggingModule {
 
     @Provides
     fun providesLogger() : Logger = object : Logger {
+        override fun debug(tag: String, message: String) {
+            Log.d(tag, message)
+        }
+
+        override fun info(tag: String, message: String) {
+            Log.i(tag, message)
+        }
+
         override fun warn(tag : String, message: String) {
             Log.w(tag, message)
         }
