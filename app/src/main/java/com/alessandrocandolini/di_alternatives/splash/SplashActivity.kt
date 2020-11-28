@@ -26,13 +26,13 @@ class SplashActivity : AppCompatActivity() {
             logger.info("SplashActivity", "onCreate")
         }
         setContent {
-            screenContent()
+            screenContent("")
         }
     }
 }
 
 @Composable
-fun screenContent() {
+fun screenContent(s : String) {
     Column {
         Text("Hello")
         Text("world!")

@@ -19,6 +19,7 @@ object Libs {
         const val coreKtx = "androidx.core:core-ktx:1.5.0-alpha01"
 
         object Compose {
+            const val compiler = "androidx.compose.compiler:compiler:${Versions.compose}"
             const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
             const val layout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
             const val material = "androidx.compose.material:material:${Versions.compose}"
@@ -62,6 +63,11 @@ object Libs {
 
     object Images {
         const val coil = "io.coil-kt:coil:${Versions.coil}"
+    }
+
+    object Chucker {
+        const val chucker = "com.github.chuckerteam.chucker:library:${Versions.chucker}"
+        const val chuckerNoOpt = "com.github.chuckerteam.chucker:library-no-op:${Versions.chucker}"
     }
 
 }

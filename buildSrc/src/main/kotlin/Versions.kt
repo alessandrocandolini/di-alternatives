@@ -22,4 +22,6 @@ object Versions {
 
     const val hint = "2.30.1-alpha"
 
+    const val chucker = "3.4.0"
+
 }

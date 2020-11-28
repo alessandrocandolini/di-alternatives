@@ -77,8 +77,7 @@ dependencies {
     implementation(Libs.Kotlin.Coroutines.core)
     implementation(Libs.Kotlin.Coroutines.android)
 
-    implementation("androidx.compose.compiler:compiler:1.0.0-alpha07")
-
+    implementation(Libs.AndroidX.Compose.compiler)
     implementation(Libs.AndroidX.Compose.foundation)
     implementation(Libs.AndroidX.Compose.layout)
     implementation(Libs.AndroidX.Compose.material)
@@ -89,6 +88,8 @@ dependencies {
     implementation(Libs.Http.retrofit)
     implementation(Libs.Http.retrofitSerializationAdapter)
     implementation(Libs.Kotlin.serialization)
+    debugImplementation(Libs.Chucker.chucker)
+    releaseImplementation(Libs.Chucker.chuckerNoOpt)
 
     implementation(Libs.Dagger.hintAndroid)
     kapt(Libs.Dagger.hintAndroidCompiler)
