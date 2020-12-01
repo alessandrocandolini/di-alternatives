@@ -105,11 +105,12 @@ PBT is not always possible (as i mentioned), and sometimes it's not the right te
 
 class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
 
-    given("the server replies with 200 if and only if the request is authenticated, 401 otherwise") {
+    given("a server that replies 200 if and only if the request url contains exactly one appid query param with value equal to a valid api key, 401 otherwise (as per api specification)") {
 
         val aValidApiKey = "I'm a valid api key"
         val interceptor: Interceptor = ApiKeyInterceptor { aValidApiKey }
 
+        // specification of the server (from api description)
         val dispatcher: Dispatcher = { request : RecordedRequest ->
             when (request.requestUrl?.queryParameterValues(ApiKeyInterceptor.API_KEY_QUERY_PARAM)) {
                 listOf(aValidApiKey) -> 200
@@ -119,8 +120,8 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
             }
         }.toDispatcher()
 
-        `when`("query param is not present in the GET request and no interceptor is plugged") {
-            then("the response should be 401") {
+        `when`("an unauthenticated request is performed sing a client with no ApiKeyInterceptor plugged in") {
+            then("the response should be 401 (this test just tests the mock server behaves as per server specification)") {
                 withMockServer(dispatcher) { server ->
 
                     val client = OkHttpClient.Builder().build()
@@ -134,8 +135,8 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
             }
         }
 
-        `when`("query param is not present in the GET request and the interceptor is plugged") {
-            then("the response should be 200") {
+        `when`("an unauthenticated request is performed using a client with an instance of the ApiKeyInterceptor plugged in") {
+            then("the response should be 200 (ie, the interceptor appends the authentication key)") {
                 withMockServer(dispatcher) { server ->
                     val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
                     val request: Request = Request.Builder()
@@ -149,8 +150,8 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
         }
 
 
-        `when`("query param is present already in the GET request with an invalid key and the interceptor is plugged") {
-            then("the response should be 200") {
+        `when`("a request accidentally authenticated with the wrong key is performed using a client with an instance of the ApiKeyInterceptor plugged in") {
+            then("the response should be 200 (ie, the interceptor overrides the authentication key)") {
                 withMockServer(dispatcher) { server ->
                     val client = OkHttpClient.Builder()
                         .addInterceptor(interceptor)
@@ -168,5 +169,3 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
     }
 
 })
-
-

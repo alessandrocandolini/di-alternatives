@@ -6,9 +6,10 @@ buildscript {
         maven(url = "https://plugins.gradle.org/m2/") // for check-dependency-updates
     }
     dependencies {
+        // https://mvnrepository.com/artifact/com.android.tools.build/gradle?repo=google
         classpath ("com.android.tools.build:gradle:4.2.0-alpha16")
-        classpath (  "com.google.dagger:hilt-android-gradle-plugin:${Versions.hint}")
         classpath(kotlin("gradle-plugin", version = Versions.kotlin))
+        classpath (  "com.google.dagger:hilt-android-gradle-plugin:${Versions.hint}")
     }
 }
 plugins {

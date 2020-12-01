@@ -21,8 +21,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if (BuildConfig.DEBUG) {
-            // kotlin does not support call by name semantics, so we still need the IF debug
-            // if you know you are going to use R8 (like in this project) then this "if" is not needed
+            // kotlin does not support call by name semantics, so we still need this IF to wrap the log.
+            // if you know you are going to use R8 in release (like in this project does) then this IF is not needed, R8 can be used to strip the logs during compilation
             logger.info("SplashActivity", "onCreate")
         }
         setContent {
