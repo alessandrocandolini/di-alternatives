@@ -3,7 +3,7 @@
 
 # The raise and fall of DI containers (in the OOP land)
 
-Multi-module mono-platform gradle kotlin/android project, setup using gradle kotlin DSL, to explore pros, cons, rationale and alternatives to dependency injection and dependency injection containers in OOP. 
+Multi-module mono-platform gradle kotlin/android project, setup using gradle kotlin DSL, to explore pros, cons, rationale and alternatives to dependency resolution and injection through containers in OOP. 
 
 CI/CD style of development is achieved by configuring basic github actions. 
 
@@ -27,7 +27,7 @@ Although any mobile application will have to touch some (if not all) of the foll
 
 Dependency injection (referred to as DI hereafter) and usage of DI containers has undergone an increase in popularity in Android development these days, and those things have been around for ages in the Java enterprise world. This project is about refreshing these concepts, show how to apply them by leveraging some of the modern libraries and patterns available in the java/kotlin/android ecosystem (eg, Dagger), illustrate the many benefits that we can get. At the same time though, this project aims at challenging this viewpoint and contribute to the conversation on whether an argument can be made that DI containers should instead be considered as something fixing the symptomps rather than the actual underlying issue, and what the alternatives could be. 
 
-From `@Autowired` available in Spring framework to achieve annotations-driven (runtime) dependency resolution and injection of collaborating beans, to `@Inject` and `@Provides` annotations finally landing in `javax` itself to ensure class portability, to the advent of many Java production-ready DI containers  like [https://github.com/google/guice](guice) (Java reflection-based), [https://dagger.dev/](dagger2) (using compile-time Java annotation processing) and others, DI tools have become a standard in the development of OOP applications at non-trivial scale. 
+From `@Autowired` available in Spring framework to achieve annotations-driven (runtime) dependency resolution and injection of collaborating beans, to `@Inject`, `@Provides`, `@Singleton` etc annotations finally landing in `javax` itself to ensure class portability, to the advent of many Java production-ready DI containers  like [https://github.com/google/guice](guice) (Java reflection-based), [https://dagger.dev/](dagger2) (using compile-time Java annotation processing) and others, DI tools have become a standard in the development of OOP applications at non-trivial scale. 
 Over the last years, the approach has gained lot of attraction in the mobile community too. 
 Despite the enormous popularity of this approach though, it's probably time to question and rethink the approach andfrom the ground up and ask whether there are better alternatives DI. 
 Let's look at DI with more provocative eyeglasses: What is the problem that DI is trying to solve? Is DI really solving it, or is just creating more problems? Is DI a code smell/antipattern? 
