@@ -17,25 +17,28 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.RecordedRequest
+import java.net.HttpURLConnection.HTTP_OK
+import java.net.HttpURLConnection.HTTP_UNAUTHORIZED
 
 class ApiKeyInterceptorProperties : FunSpec() {
 
     private val aValidApiKey = "I'm a valid api key"
     private val interceptor: Interceptor = ApiKeyInterceptor { aValidApiKey }
 
-    private val dispatcher : Dispatcher = object : Dispatcher() {
-        override fun dispatch(request: RecordedRequest): MockResponse =
-            if (request.hasQueryParamMatching(ApiKeyInterceptor.API_KEY_QUERY_PARAM, aValidApiKey)) {
-                200
-            } else {
-                401
-            }.let { responseCode ->
-                MockResponse().setResponseCode(responseCode)
-            }
-    }
-
     init {
-        test("For every request (no matter what the http verb, headers, body, path, query params are), request with no interceptor plugged should return 401 & request with interceptor plugged should return 200") {
+        test("Given a server that matches the specification, for every request (no matter what the http method, headers, body, path, query params are), request with no ApiKeyInterceptor plugged should return 401 (baseline) && request with an instance of ApiKeyInterceptor plugged in should always return 200") {
+
+            // server as per specification
+            val dispatcher : Dispatcher = object : Dispatcher() {
+                override fun dispatch(request: RecordedRequest): MockResponse =
+                    if (request.hasQueryParamMatching(ApiKeyInterceptor.API_KEY_QUERY_PARAM, aValidApiKey)) {
+                        HTTP_OK
+                    } else {
+                        HTTP_UNAUTHORIZED
+                    }.let { responseCode ->
+                        MockResponse().setResponseCode(responseCode)
+                    }
+            }
 
             withMockServer(dispatcher) { server ->
 
@@ -47,10 +50,39 @@ class ApiKeyInterceptorProperties : FunSpec() {
 
                 checkAll(requestGen) { request ->
 
-                    val r1 = clientWithoutInterceptor.newCall(request).execute()
-                    val r2 = clientWithInterceptor.newCall(request).execute()
+                    val responseWithoutInterceptor = clientWithoutInterceptor.newCall(request).execute()
+                    val responseWithInterceptor = clientWithInterceptor.newCall(request).execute()
 
-                    r1.code == 401 && r2.code == 200
+                    responseWithoutInterceptor.code == HTTP_UNAUTHORIZED && responseWithInterceptor.code == HTTP_OK
+
+                }
+
+            }
+
+        }
+
+        test("Given a echo service that does not require any authentication, for every request the interceptor is completely transparent ") {
+
+            val echoDispatcher : Dispatcher = object : Dispatcher() {
+
+                override fun dispatch(request: RecordedRequest): MockResponse = MockResponse().setResponseCode(HTTP_OK)
+
+            }
+
+            withMockServer(echoDispatcher) { server ->
+
+                val clientWithoutInterceptor = OkHttpClient.Builder().build()
+                val clientWithInterceptor =
+                    clientWithoutInterceptor.newBuilder().addInterceptor(interceptor).build()
+
+                val requestGen: Gen<Request> = requestGen { server.url(it) }
+
+                checkAll(requestGen) { request ->
+
+                    val responseWithoutInterceptor = clientWithoutInterceptor.newCall(request).execute()
+                    val responseWithInterceptor = clientWithInterceptor.newCall(request).execute()
+
+                    responseWithoutInterceptor.code == responseWithInterceptor.code
 
                 }
 

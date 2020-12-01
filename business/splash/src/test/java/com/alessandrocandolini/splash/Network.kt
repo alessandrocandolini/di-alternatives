@@ -103,9 +103,17 @@ PBT is not always possible (as i mentioned), and sometimes it's not the right te
 */
 
 
+// Regardless of whether we want to be example-based or property-based, we have two approaches to test this:
+// * one is direct and low level: we check that thr interceptor hydrates the incoming request with a query param. The test will inspect the request to check if the api key was correctly appended
+// * another one is slightly indirect and higher level: we prepare a (stub) server behaving as per specification, we make requests to it using the interceptor and we assert that the request were authorised
+// The first one tests the HOW. The second one tests the BEHAVIOUR.
+// The first one is more sensitive to implementation details (because we are testing the how), the second one requires though to prepare a well-behaving stub server
+// The second one has the additional advantage to force you to look at the same problem from an angle which is different than the one used when writing the implementation of the interceptor
+// The first one would also force us to have a better understanding of the internals of okhttp (what is a Interceptor.Chain and how to create it?)
+
 class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
 
-    given("a server that replies 200 if and only if the request url contains exactly one appid query param with value equal to a valid api key, 401 otherwise (as per api specification)") {
+    given("a stub server that replies 200 if and only if the request url contains exactly one appid query param with value equal to a valid api key, 401 otherwise (as per api specification)") {
 
         val aValidApiKey = "I'm a valid api key"
         val interceptor: Interceptor = ApiKeyInterceptor { aValidApiKey }
@@ -120,16 +128,16 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
             }
         }.toDispatcher()
 
-        `when`("an unauthenticated request is performed sing a client with no ApiKeyInterceptor plugged in") {
+        `when`("an unauthenticated request is performed using a client with no ApiKeyInterceptor plugged in") {
             then("the response should be 401 (this test just tests the mock server behaves as per server specification)") {
                 withMockServer(dispatcher) { server ->
 
-                    val client = OkHttpClient.Builder().build()
-                    val request: Request = Request.Builder()
+                    val clientWithoutInterceptr = OkHttpClient.Builder().build()
+                    val aRequest: Request = Request.Builder()
                         .get()
                         .url(server.url("/api?api=test"))
                         .build()
-                    val r = client.newCall(request).execute()
+                    val r = clientWithoutInterceptr.newCall(aRequest).execute()
                     r.code shouldBe 401
                 }
             }
@@ -138,12 +146,12 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
         `when`("an unauthenticated request is performed using a client with an instance of the ApiKeyInterceptor plugged in") {
             then("the response should be 200 (ie, the interceptor appends the authentication key)") {
                 withMockServer(dispatcher) { server ->
-                    val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-                    val request: Request = Request.Builder()
+                    val clientWithInterceptor = OkHttpClient.Builder().addInterceptor(interceptor).build()
+                    val aRequest: Request = Request.Builder()
                         .get()
                         .url(server.url("/api?api=test"))
                         .build()
-                    val r = client.newCall(request).execute()
+                    val r = clientWithInterceptor.newCall(aRequest).execute()
                     r.code shouldBe 200
                 }
             }
@@ -169,3 +177,15 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
     }
 
 })
+
+fun property(interceptor : Interceptor) : (Request) -> Boolean = { request ->
+    val clientWithoutIntercepr = OkHttpClient.Builder().build()
+    val clientWithInterceptor  = OkHttpClient.Builder().addInterceptor(interceptor).build()
+    val clientWithoutInterceprResponse = clientWithoutIntercepr.newCall(request).execute()
+    val clientWithInterceprResponse = clientWithInterceptor.newCall(request).execute()
+    clientWithoutInterceprResponse.code == 401 && clientWithInterceprResponse.code == 200
+}
+
+// for EVERY request (i don't care whether they are GET, POST etc; i don't mind request headers, or URLS)
+// { request -> when i send it using a okhttp client WITH interceptor, the response should be  200
+// && when i send it using a okhttp client WITH NO interceptor, the response should be 401 (baseline)  }
