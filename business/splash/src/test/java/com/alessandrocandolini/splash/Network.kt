@@ -1,13 +1,13 @@
 package com.alessandrocandolini.splash
 
-import com.alessandrocandolini.toDispatcher
+import com.alessandrocandolini.await
+import com.alessandrocandolini.hasQueryParamMatching
 import com.alessandrocandolini.withMockServer
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.RecordedRequest
 
@@ -119,14 +119,15 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
         val interceptor: Interceptor = ApiKeyInterceptor { aValidApiKey }
 
         // specification of the server (from api description)
-        val dispatcher: Dispatcher = { request : RecordedRequest ->
-            when (request.requestUrl?.queryParameterValues(ApiKeyInterceptor.API_KEY_QUERY_PARAM)) {
-                listOf(aValidApiKey) -> 200
-                else -> 401
+        val dispatcher = { request : RecordedRequest ->
+            if (request.hasQueryParamMatching(ApiKeyInterceptor.API_KEY_QUERY_PARAM, aValidApiKey)) {
+                200
+            } else {
+                401
             }.let { code ->
-                MockResponse().setResponseCode(code)
+                MockResponse().setResponseCode(code).setBody("{}")
             }
-        }.toDispatcher()
+        }
 
         `when`("an unauthenticated request is performed using a client with no ApiKeyInterceptor plugged in") {
             then("the response should be 401 (this test just tests the mock server behaves as per server specification)") {
@@ -137,7 +138,7 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
                         .get()
                         .url(server.url("/api?api=test"))
                         .build()
-                    val r = clientWithoutInterceptr.newCall(aRequest).execute()
+                    val r = clientWithoutInterceptr.newCall(aRequest).await()
                     r.code shouldBe 401
                 }
             }
@@ -151,7 +152,7 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
                         .get()
                         .url(server.url("/api?api=test"))
                         .build()
-                    val r = clientWithInterceptor.newCall(aRequest).execute()
+                    val r = clientWithInterceptor.newCall(aRequest).await()
                     r.code shouldBe 200
                 }
             }
@@ -168,7 +169,7 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
                         .get()
                         .url(server.url("/api?api=test&appid=something"))
                         .build()
-                    val r = client.newCall(request).execute()
+                    val r = client.newCall(request).await()
                     r.code shouldBe 200
                 }
 
@@ -177,15 +178,3 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
     }
 
 })
-
-fun property(interceptor : Interceptor) : (Request) -> Boolean = { request ->
-    val clientWithoutIntercepr = OkHttpClient.Builder().build()
-    val clientWithInterceptor  = OkHttpClient.Builder().addInterceptor(interceptor).build()
-    val clientWithoutInterceprResponse = clientWithoutIntercepr.newCall(request).execute()
-    val clientWithInterceprResponse = clientWithInterceptor.newCall(request).execute()
-    clientWithoutInterceprResponse.code == 401 && clientWithInterceprResponse.code == 200
-}
-
-// for EVERY request (i don't care whether they are GET, POST etc; i don't mind request headers, or URLS)
-// { request -> when i send it using a okhttp client WITH interceptor, the response should be  200
-// && when i send it using a okhttp client WITH NO interceptor, the response should be 401 (baseline)  }
