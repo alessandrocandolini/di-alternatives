@@ -125,7 +125,9 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
             } else {
                 401
             }.let { code ->
-                MockResponse().setResponseCode(code).setBody("{}")
+                MockResponse().setResponseCode(code)
+                    .addHeader("Content-Type", "application/json; charset=utf-8")
+                    .setBody("{}")
             }
         }
 
