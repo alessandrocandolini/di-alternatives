@@ -104,7 +104,7 @@ PBT is not always possible (as i mentioned), and sometimes it's not the right te
 
 
 // Regardless of whether we want to be example-based or property-based, we have two approaches to test this:
-// * one is direct and low level: we check that thr interceptor hydrates the incoming request with a query param. The test will inspect the request to check if the api key was correctly appended
+// * one is direct and low-level: we check that the interceptor hydrates the incoming request with a query param. The test will inspect the request to check if the api key was correctly appended
 // * another one is slightly indirect and higher level: we prepare a (stub) server behaving as per specification, we make requests to it using the interceptor and we assert that the request were authorised
 // The first one tests the HOW. The second one tests the BEHAVIOUR.
 // The first one is more sensitive to implementation details (because we are testing the how), the second one requires though to prepare a well-behaving stub server
@@ -135,12 +135,12 @@ class ApiKeyInterceptorExampleBasedTest : BehaviorSpec({
             then("the response should be 401 (this test just tests the mock server behaves as per server specification)") {
                 withMockServer(dispatcher) { server ->
 
-                    val clientWithoutInterceptr = OkHttpClient.Builder().build()
+                    val clientWithoutInterceptor = OkHttpClient.Builder().build()
                     val aRequest: Request = Request.Builder()
                         .get()
                         .url(server.url("/api?api=test"))
                         .build()
-                    val r = clientWithoutInterceptr.newCall(aRequest).await()
+                    val r = clientWithoutInterceptor.newCall(aRequest).await()
                     r.code shouldBe 401
                 }
             }

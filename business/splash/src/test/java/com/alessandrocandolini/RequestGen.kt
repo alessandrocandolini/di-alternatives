@@ -22,7 +22,7 @@ internal object RequestGen {
 
     fun requestGen(pathToFullUrl: (String) -> HttpUrl): Gen<Request> {
         val httpUrlGen: Gen<HttpUrl> = Exhaustive.collection(setOf(
-            "api/v1/",
+            "/api/v1/",
             "/api?api=test&appid=something",
             "/api?api=test"
         ).map { u -> pathToFullUrl(u) })
