@@ -48,7 +48,7 @@ Main technologies used:
 
 [anvil](https://github.com/square/anvil) is a very interesting approach to scale dagger projects in Kotlin, however here I've decided to use [hint](https://dagger.dev/hilt/), primarily because the ergonomics is optimised for the Android usecase. More info on anvil can be found [here](https://developer.squareup.com/blog/introducing-anvil/).
 
-This project does NOT make usage of [koin](https://github.com/InsertKoinIO/koin). The lack of compile-time safety is already enough as an argument to stop me from taking koin into seriously account (not to mention the fact that should more properly considered a service locator). 
+This project does NOT make usage of [koin](https://github.com/InsertKoinIO/koin). The lack of compile-time safety is already enough as an argument to stop me from taking koin seriously into account (without even touching the conversation around the fact that koin should more properly be considered a service locator). 
 
 No mocking library has been used on purpose. Mocking in unit tests is arguably an antipattern, but that's a topic for another project ;) 
 
