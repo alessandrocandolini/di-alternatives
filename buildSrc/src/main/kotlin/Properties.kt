@@ -27,8 +27,8 @@ private fun logString(key: String, s: String?) : String {
 
 private fun getProperty(key: String): String = getOptionalProperty(key)!!
 
-fun String.escape() = "\"$this\""
+private fun String.escape() = "\"$this\""
 
 val apiKey: String by lazy {
-    getProperty("API_KEY")
+    getProperty("API_KEY").escape()
 }

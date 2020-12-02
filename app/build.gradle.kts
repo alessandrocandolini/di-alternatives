@@ -23,13 +23,13 @@ android {
 
     buildTypes {
         getByName("debug") {
-            buildConfigField("String", "API_KEY", apiKey.escape())
+            buildConfigField("String", "API_KEY", apiKey)
             isMinifyEnabled = false
             isShrinkResources = false
             isDebuggable = true
         }
         getByName("release") {
-            buildConfigField("String", "API_KEY", apiKey.escape())
+            buildConfigField("String", "API_KEY", apiKey)
             isMinifyEnabled = true
             isShrinkResources = true
             isDebuggable = false

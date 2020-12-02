@@ -27,7 +27,7 @@ class NetworkModule {
     @Singleton
     @Provides
     fun providesChuckerInterceptor(
-        // @ActivityContext context: Context // why this compilation does not fail
+        // @ActivityContext context: Context // why this compilation does not fail?
         @ApplicationContext context: Context
     ): ChuckerInterceptor =
         ChuckerInterceptor.Builder(context)
