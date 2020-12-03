@@ -65,7 +65,7 @@ class ApiKeyInterceptor @Inject constructor(private val store: ApiKeyStore) : In
 
         val transformRequestUrl: ((HttpUrl) -> HttpUrl) -> (Request) -> Request = { transformUrl ->
             { originalRequest ->
-                originalRequest.newBuilder().url(transformUrl(originalRequest.url)).build()
+                originalRequest.newBuilder().url(originalRequest.url.let(transformUrl)).build()
             }
         }
 
