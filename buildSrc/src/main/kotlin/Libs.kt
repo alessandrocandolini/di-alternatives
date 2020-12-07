@@ -24,7 +24,7 @@ object Libs {
             const val layout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
             const val material = "androidx.compose.material:material:${Versions.compose}"
             const val runtime = "androidx.compose.runtime:runtime:${Versions.compose}"
-            const val tooling = "androidx.ui:ui-tooling:${Versions.compose}"
+            const val tooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
             const val test = "androidx.compose.test:test-core:${Versions.compose}"
             const val uiTest = "androidx.ui:ui-test:${Versions.compose}"
         }

@@ -1,6 +1,6 @@
 object Versions {
 
-    const val kotlin = "1.4.10" // "1.4.20-RC" is not compatible with the compose compiler
+    const val kotlin = "1.4.21"
     const val kotlinCollections = "0.3.3"
     const val kotlinCoroutines = "1.4.2"
     const val kotlinSerializationRuntime = "1.0.1"
@@ -9,7 +9,8 @@ object Versions {
     const val androidxAppcompact = "1.2.0"
     const val androidxConstraintlayout = "1.1.3"
 
-    const val compose = "1.0.0-alpha07"
+    // check release notes here https://developer.android.com/jetpack/androidx/releases/ui#1.0.0-alpha08
+    const val compose = "1.0.0-alpha08"
 
     const val arrow = "1.0.0-SNAPSHOT" // "0.11.0"
     const val kotest = "4.3.1"
