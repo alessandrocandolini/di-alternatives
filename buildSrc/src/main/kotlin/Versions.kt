@@ -12,8 +12,8 @@ object Versions {
     // check release notes here https://developer.android.com/jetpack/androidx/releases/ui#1.0.0-alpha08
     const val compose = "1.0.0-alpha08"
 
-    const val arrow = "1.0.0-SNAPSHOT" // "0.11.0"
-    const val kotest = "4.3.1"
+    const val arrow = "0.12.0-SNAPSHOT" // "0.11.0"
+    const val kotest = "4.3.2"
 
     const val okhttp = "4.10.0-RC1"
     const val retrofit = "2.9.0"

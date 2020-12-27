@@ -56,7 +56,7 @@ class ApiKeyInterceptor @Inject constructor(private val store: ApiKeyStore) : In
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest: Request = chain.request()
-        val request = originalRequest.addAuthentication() // just for fun, i actually prefer having the code all written  here instead of delegating to curried functions in this case
+        val request = originalRequest.addAuthentication() // just for fun
         return chain.proceed(request)
     }
 
